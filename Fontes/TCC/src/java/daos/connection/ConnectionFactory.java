@@ -14,6 +14,7 @@ public class ConnectionFactory {
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException ex) {
             Logger.getLogger(ConnectionFactory.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
         return DriverManager.getConnection("jdbc:mysql://localhost:3306/tcc_engsoft", "root", "mysql");
     }
 }

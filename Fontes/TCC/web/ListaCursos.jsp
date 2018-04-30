@@ -1,5 +1,6 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -78,6 +79,9 @@
                 </div>
             </div>
         </nav>
+        
+        
+        
         <section class="section">
             <div class="container" style="padding-top: 20px; padding-bottom: 20px;">
                 <table style="width: 100%">
@@ -107,13 +111,44 @@
                     <thead>
                         <tr>
                             <th style="width: 10%">
-                                #
+                                ID
                             </th>
                             <th style="width: 90%">
                                 Nome
                             </th>
+                            <th/>
+                            <th/>
                         </tr>
                     </thead>
+                    
+                    <tbody>
+                        
+                        <c:forEach var="curso" items="${cursos}" varStatus="inf">
+                            <tr>
+                                <td>
+                                    ${curso.id}
+                                </td>
+                                <td>
+                                    ${curso.nome}
+                                </td>
+                                <td>
+                                    <a href="CursoServlet?acao=editar&id=${curso.id}" class="button is-success is-outlined">
+                                        <span class="icon is-small">
+                                            <i class="fas fa-pencil-alt"></i>
+                                        </span>
+                                    </a>
+                                </td>
+                                <td>
+                                    <a href="CursoServlet?acao=remover&id=${curso.id}" class="button is-danger is-outlined">
+                                        <span class="icon is-small">
+                                            <i class="fas fa-trash-alt"></i>
+                                        </span>
+                                    </a>
+                                </td>
+                            </tr>
+                        </c:forEach>
+                    
+                    </tbody>
                 </table>
             </div>
         </section>

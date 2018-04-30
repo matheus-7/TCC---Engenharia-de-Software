@@ -13,7 +13,7 @@ import java.util.ArrayList;
 public class CursoDaoImpl implements CursoDao {
 
     private final String stmtListar = "select CurId, CurNome, CurDataCad " + 
-                                      "from cliente";
+                                      "from curso";
 
     
     @Override

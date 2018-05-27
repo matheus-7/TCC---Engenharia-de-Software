@@ -1,5 +1,5 @@
 
-<%@ page contentType="text/html; charset=ISO-8859-1" language="java" pageEncoding="UTF-8" import="java.sql.*" errorPage="" %>
+<%@page contentType="text/html; charset=ISO-8859-1" language="java" pageEncoding="UTF-8" import="java.sql.*" errorPage="" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
@@ -7,7 +7,6 @@
         <title>Painel Administrativo</title>
         
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta charset="utf-8">
         
         <link rel="stylesheet" href="bulma-0.7.0\css\bulma.min.css">
         <link rel="stylesheet" href="Jquery/jquery-ui.css" />
@@ -87,71 +86,48 @@
                 <table style="width: 100%">
                     <tr>
                         <td>
-                            <h1 class="title">Lista de Cursos</h1>
-                        </td>
-                        <td style="text-align: right">
-                            <a href="FormCurso.jsp" class="button is-primary">
-                                <span class="icon is-small">
-                                    <i class="fas fa-plus"></i>
-                                </span>
-                                <span>Novo Curso</span>
-                            </a>
+                            <h1 class="title">Cadastro de Curso</h1>
                         </td>
                     </tr>
                 </table>        
             </div>
+            
             <div class="container">
-                <div class="field">
-                    <div class="control">
-                        <input class="input" type="text" placeholder="Palavra-chave">
+                <form method="POST" action="CursoServlet?acao=salvar">
+                    <div class="field">
+                        <table class="table is-fullwidth">
+                            <tbody>
+                                <tr>
+                                    <td style="width: 80%">
+                                        <label class="label">Nome:</label>
+                                        <div class="control">
+                                            <input name="nome" class="input" value="${curso.nome}" type="text" placeholder="Nome">
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                                        
+                        <input name="id" type="hidden" value="${curso.id}" />                    
+
+                        <div class="buttons is-centered">
+                            <button class="button is-success" type="submit">
+                                <span class="icon is-small">
+                                    <i class="fas fa-save"></i>
+                                </span>
+                                <span>Gravar</span>
+                            </button>
+                            <a href="CursoServlet" class="button is-danger">
+                                <span class="icon is-small">
+                                    <i class="fas fa-times circle"></i>
+                                </span>
+                                <span>Cancelar</span>
+                            </a>
+                        </div>
                     </div>
-                </div>
+                </form>
                 
-                <table class="table is-fullwidth">
-                    <thead>
-                        <tr>
-                            <th style="width: 10%">
-                                ID
-                            </th>
-                            <th style="width: 90%">
-                                Nome
-                            </th>
-                            <th/>
-                            <th/>
-                        </tr>
-                    </thead>
-                    
-                    <tbody>
-                        
-                        <c:forEach var="curso" items="${cursos}" varStatus="inf">
-                            <tr>
-                                <td>
-                                    ${curso.id}
-                                </td>
-                                <td>
-                                    ${curso.nome}
-                                </td>
-                                <td>
-                                    <a href="CursoServlet?acao=editar&id=${curso.id}" class="button is-success is-outlined">
-                                        <span class="icon is-small">
-                                            <i class="fas fa-pencil-alt"></i>
-                                        </span>
-                                    </a>
-                                </td>
-                                <td>
-                                    <a href="CursoServlet?acao=excluir&id=${curso.id}" class="button is-danger is-outlined">
-                                        <span class="icon is-small">
-                                            <i class="fas fa-trash-alt"></i>
-                                        </span>
-                                    </a>
-                                </td>
-                            </tr>
-                        </c:forEach>
-                    
-                    </tbody>
-                </table>
             </div>
         </section>
-        
     </body>
 </html>

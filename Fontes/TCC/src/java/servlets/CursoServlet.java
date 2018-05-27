@@ -5,6 +5,7 @@ import daos.curso.CursoDao;
 import daos.curso.CursoDaoImpl;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Date;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -28,54 +29,55 @@ public class CursoServlet extends HttpServlet {
             String acao = request.getParameter("acao");
 
             if (acao == null) redirectCursos(request, response);
-//            else if (acao.equals("salvar")){
-//                int id = 0;
-//                
-//                try {
-//                    id = Integer.parseInt(request.getParameter("id"));
-//                } catch (NumberFormatException e) {
-//                    id = 0;
-//                }
-//                
-//                String cpf = request.getParameter("cpf");
-//                String nome = request.getParameter("nome");
-//                String sobrenome = request.getParameter("sobrenome");
-//
-//                cliente = new Cliente(id, cpf, nome, sobrenome);
-//                    
-//                try {
-//                    if (id != 0) {
-//                        clienteDao.atualizar(cliente);
-//                    } else {
-//                        clienteDao.criar(cliente);
-//                    }
-//                    redirectClientes(request, response);
-//                } catch (Exception e) {
-//                    request.setAttribute("erro", "Não foi possível gravar este cliente");
-//                    redirectClientesCadastro(request, response);
-//                }
-//            }
-//            else if (acao.equals("remover")){
-//                String cpf = request.getParameter("cpf");
-//                
-//                try {
-//                    clienteDao.removerPorCpf(cpf);
-//                    redirectClientes(request, response);
-//                } catch (Exception e) {
-//                    request.setAttribute("erro", "Não foi possível remover este cliente");
-//                    redirectClientes(request, response);
-//                }
-//            }
-//            else if (acao.equals("editar")){
-//                int id = Integer.parseInt(request.getParameter("id"));
-//                cliente = clienteDao.consultarPorId(id);
-//                if (cliente != null) {
-//                    request.setAttribute("cliente", cliente);
-//                    request.getRequestDispatcher("/cliente-form.jsp").forward(request, response);
-//                } else {
-//                    redirectClientes(request, response);
-//                }
-//            }   
+            else if (acao.equals("salvar")){
+                int id = 0;
+                
+                try {
+                    id = Integer.parseInt(request.getParameter("id"));
+                } catch (NumberFormatException e) {
+                    id = 0;
+                }
+                
+                String nome = request.getParameter("nome");
+   
+                curso = new Curso(id, nome, new Date(System.currentTimeMillis()));
+                    
+                try {
+                    if (!CursoDao.Existe(curso)){
+                        if (id != 0) CursoDao.Atualizar(curso);
+                        else CursoDao.Inserir(curso);
+                    }
+                    else{
+                    
+                    }
+                    
+                    redirectCursos(request, response);
+                } catch (Exception e) {
+                    request.setAttribute("erro", "Não foi possível gravar este curso!");
+                    redirectClientesCadastro(request, response);
+                }
+            }
+            else if (acao.equals("excluir")){
+                int id = Integer.parseInt(request.getParameter("id"));
+                
+                try {
+                    CursoDao.Excluir(id);
+                    redirectCursos(request, response);
+                } catch (Exception e) {
+                    request.setAttribute("erro", "Não foi possível remover este curso!");
+                    redirectCursos(request, response);
+                }
+            }
+            else if (acao.equals("editar")){
+                int id = Integer.parseInt(request.getParameter("id"));
+                curso = CursoDao.Selecionar(id);
+                if (curso != null) {
+                    request.setAttribute("curso", curso);
+                    request.getRequestDispatcher("/FormCurso.jsp").forward(request, response);
+                } else {
+                    redirectCursos(request, response);
+                }
+            }   
         }        
     }
     
@@ -88,7 +90,7 @@ public class CursoServlet extends HttpServlet {
     
     private void redirectClientesCadastro(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.getRequestDispatcher("/CadCursos.jsp").forward(request, response);
+        request.getRequestDispatcher("/FormCurso.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

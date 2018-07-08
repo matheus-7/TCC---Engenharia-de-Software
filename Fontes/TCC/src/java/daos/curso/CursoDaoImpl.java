@@ -18,17 +18,18 @@ public class CursoDaoImpl implements CursoDao {
     
     private final String stmtExcluir = "delete from curso where CurId = ?";
     
-    private final String stmtExiste = "select CurId" +
-                                      "from curso" + 
+    private final String stmtExiste = "select CurId " +
+                                      "from curso " + 
                                       "where CurNome = ?";
     
     private final String stmtInserir = "insert into curso (CurNome, CurDataCad) values (?, ?)";
     
     private final String stmtListar = "select CurId, CurNome, CurDataCad " + 
-                                      "from curso";
+                                      "from curso " +
+                                      "order by CurNome";
     
-    private final String stmtSelecionar = "select CurId, CurNome, CurDataCad" +
-                                          "from curso" +
+    private final String stmtSelecionar = "select CurId, CurNome, CurDataCad " +
+                                          "from curso " +
                                           "where CurId = ?";
     
     

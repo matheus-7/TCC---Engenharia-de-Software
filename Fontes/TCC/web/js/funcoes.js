@@ -23,6 +23,16 @@ function atualizarLinhasSelecionadas(cb) {
     $(linha).trigger('click');
 }
 
+function buscar(palavraChave, tabelaId) {
+    palavraChave = $('#' + palavraChave.id).val().toLowerCase();
+    
+    $('#' + tabelaId + ' tr').filter(function(){
+        if (this.id !== 'header'){
+            $(this).toggle($(this).text().toLowerCase().indexOf(palavraChave) > -1);
+        }        
+    });
+}
+
 function calendar(textBox) {
 
     var textBox = $("#" + textBox);

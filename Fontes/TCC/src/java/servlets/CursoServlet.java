@@ -54,7 +54,7 @@ public class CursoServlet extends HttpServlet {
                     redirectCursos(request, response);
                 } catch (Exception e) {
                     request.setAttribute("erro", "Não foi possível gravar este curso!");
-                    redirectClientesCadastro(request, response);
+                    redirectCursoCadastro(request, response);
                 }
             }
             else if (acao.equals("excluir")){
@@ -88,7 +88,7 @@ public class CursoServlet extends HttpServlet {
         request.getRequestDispatcher("/ListaCursos.jsp").forward(request, response);
     }
     
-    private void redirectClientesCadastro(HttpServletRequest request, HttpServletResponse response)
+    private void redirectCursoCadastro(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         request.getRequestDispatcher("/FormCurso.jsp").forward(request, response);
     }

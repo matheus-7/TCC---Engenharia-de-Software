@@ -103,13 +103,13 @@
             <div class="container">
                 <div class="field">
                     <div class="control">
-                        <input class="input" type="text" placeholder="Palavra-chave">
+                        <input class="input" type="text" placeholder="Palavra-chave" id="tbPalavraChave" onkeyup="buscar(this, 'tbCursos')">
                     </div>
                 </div>
                 
-                <table class="table is-fullwidth">
+                <table class="table is-fullwidth" id="tbCursos">
                     <thead>
-                        <tr>
+                        <tr id="header"> 
                             <th style="width: 10%">
                                 ID
                             </th>

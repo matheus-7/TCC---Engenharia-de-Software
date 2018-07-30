@@ -93,6 +93,9 @@
             </div>
             
             <div class="container">
+                
+                <label class="label help is-danger">${erro}</label>
+                                                
                 <form method="POST" action="CursoServlet?acao=salvar">
                     <div class="field">
                         <table class="table is-fullwidth">
@@ -101,14 +104,14 @@
                                     <td style="width: 80%">
                                         <label class="label">Nome:</label>
                                         <div class="control">
-                                            <input name="nome" class="input" value="${curso.nome}" type="text" placeholder="Nome">
+                                            <input name="nome" class="input" value="${curso.getNome()}" type="text" placeholder="Nome">
                                         </div>
                                     </td>
                                 </tr>
                             </tbody>
                         </table>
                                         
-                        <input name="id" type="hidden" value="${curso.id}" />                    
+                        <input name="id" type="hidden" value="${curso.getId()}" />                    
 
                         <div class="buttons is-centered">
                             <button class="button is-success" type="submit">

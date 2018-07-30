@@ -43,18 +43,21 @@ public class CursoServlet extends HttpServlet {
                 curso = new Curso(id, nome, new Date(System.currentTimeMillis()));
                     
                 try {
+                    if (!validarCurso(curso, request, response)) return;
+                    
                     if (!CursoDao.Existe(curso)){
                         if (id != 0) CursoDao.Atualizar(curso);
                         else CursoDao.Inserir(curso);
                     }
                     else{
-                    
+                        request.setAttribute("erro", "O curso de " + curso.getNome() +  " já possui registro no banco de dados!");
+                        redirectCursoCadastro(request, response, curso);
                     }
                     
                     redirectCursos(request, response);
                 } catch (Exception e) {
                     request.setAttribute("erro", "Não foi possível gravar este curso!");
-                    redirectCursoCadastro(request, response);
+                    redirectCursoCadastro(request, response, curso);
                 }
             }
             else if (acao.equals("excluir")){
@@ -64,7 +67,7 @@ public class CursoServlet extends HttpServlet {
                     CursoDao.Excluir(id);
                     redirectCursos(request, response);
                 } catch (Exception e) {
-                    request.setAttribute("erro", "Não foi possível remover este curso!");
+                    request.setAttribute("erro", "O curso selecionado está sendo usado em outros cadastros e não pode ser excluído!");
                     redirectCursos(request, response);
                 }
             }
@@ -88,9 +91,25 @@ public class CursoServlet extends HttpServlet {
         request.getRequestDispatcher("/ListaCursos.jsp").forward(request, response);
     }
     
-    private void redirectCursoCadastro(HttpServletRequest request, HttpServletResponse response)
+    private void redirectCursoCadastro(HttpServletRequest request, HttpServletResponse response, Curso curso)
             throws ServletException, IOException {
+        request.setAttribute("curso", curso);
         request.getRequestDispatcher("/FormCurso.jsp").forward(request, response);
+    }
+    
+    private boolean validarCurso(Curso curso, HttpServletRequest request, HttpServletResponse response){
+        try {
+            if (curso.getNome() == null || curso.getNome() == ""){
+                request.setAttribute("erro", "O preenchimento do campo 'Curso' é obrigatório");
+                redirectCursoCadastro(request, response, curso);
+                return false;
+            }
+        }
+        catch (Exception e){
+            return false;
+        }
+        
+        return true;
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

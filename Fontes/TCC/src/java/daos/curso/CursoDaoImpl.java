@@ -41,7 +41,7 @@ public class CursoDaoImpl implements CursoDao {
             con = ConnectionFactory.getConnection();
             stmt = con.prepareStatement(stmtAtualizar);
             stmt.setString(1, curso.getNome());
-            stmt.setDate(2, new java.sql.Date(curso.getDataCadastro().getTime()));
+            stmt.setTimestamp(2, new java.sql.Timestamp(curso.getDataCadastro().getTime()));
             stmt.setInt(3, curso.getId());
             stmt.executeUpdate();
         } catch (SQLException ex) {
@@ -128,12 +128,14 @@ public class CursoDaoImpl implements CursoDao {
         Connection con = null;
         PreparedStatement stmt = null;
         try {
-            con = ConnectionFactory.getConnection();
-            stmt = con.prepareStatement(stmtInserir, PreparedStatement.RETURN_GENERATED_KEYS);
-            stmt.setString(1, curso.getNome());
-            stmt.setDate(2, new java.sql.Date(curso.getDataCadastro().getTime()));
-            stmt.executeUpdate();
-            curso.setId(getId(stmt));
+            if (curso.getNome() != null){
+                con = ConnectionFactory.getConnection();
+                stmt = con.prepareStatement(stmtInserir, PreparedStatement.RETURN_GENERATED_KEYS);
+                stmt.setString(1, curso.getNome());
+                stmt.setTimestamp(2, new java.sql.Timestamp(curso.getDataCadastro().getTime()));
+                stmt.executeUpdate();
+                curso.setId(getId(stmt));
+            }
         } catch (SQLException ex) {
             throw new RuntimeException("Erro ao inserir um curso no banco de dados. Origem=" + ex.getMessage());
         } finally {

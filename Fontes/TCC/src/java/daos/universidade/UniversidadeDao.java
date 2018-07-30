@@ -1,14 +1,20 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package daos.universidade;
 
-/**
- *
- * @author maath
- */
+import java.util.List;
+import models.Universidade;
+
+
 public interface UniversidadeDao {
+    public boolean Existe(Universidade universidade);
+
+    public Universidade Selecionar(int id);
     
+    public List<Universidade> Listar();
+    
+    public void Atualizar(Universidade universidade);
+    
+    public void Excluir(int id);
+    
+    public void Inserir(Universidade universidade);
 }

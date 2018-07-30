@@ -107,6 +107,8 @@
                     </div>
                 </div>
                 
+                <label class="label help is-danger">${erro}</label>
+                
                 <table class="table is-fullwidth" id="tbCursos">
                     <thead>
                         <tr id="header"> 
@@ -126,20 +128,20 @@
                         <c:forEach var="curso" items="${cursos}" varStatus="inf">
                             <tr>
                                 <td>
-                                    ${curso.id}
+                                    ${curso.getId()}
                                 </td>
                                 <td>
-                                    ${curso.nome}
+                                    ${curso.getNome()}
                                 </td>
                                 <td>
-                                    <a href="CursoServlet?acao=editar&id=${curso.id}" class="button is-success is-outlined">
+                                    <a href="CursoServlet?acao=editar&id=${curso.getId()}" class="button is-success is-outlined">
                                         <span class="icon is-small">
                                             <i class="fas fa-pencil-alt"></i>
                                         </span>
                                     </a>
                                 </td>
                                 <td>
-                                    <a href="CursoServlet?acao=excluir&id=${curso.id}" class="button is-danger is-outlined">
+                                    <a href="CursoServlet?acao=excluir&id=${curso.getId()}" class="button is-danger is-outlined">
                                         <span class="icon is-small">
                                             <i class="fas fa-trash-alt"></i>
                                         </span>

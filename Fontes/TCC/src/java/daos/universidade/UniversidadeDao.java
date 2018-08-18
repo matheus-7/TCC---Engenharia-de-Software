@@ -6,7 +6,7 @@ import models.Universidade;
 
 
 public interface UniversidadeDao {
-    public boolean Existe(Universidade universidade);
+    public boolean Existe(Universidade universidade, String nomeAnterior);
 
     public Universidade Selecionar(int id);
     

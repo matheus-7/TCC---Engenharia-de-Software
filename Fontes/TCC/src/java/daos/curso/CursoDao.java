@@ -12,6 +12,8 @@ public interface CursoDao {
     
     public List<Curso> Listar();
     
+    public List<Curso> Listar(int idUniversidade);
+    
     public void Atualizar(Curso curso);
     
     public void Excluir(int id);

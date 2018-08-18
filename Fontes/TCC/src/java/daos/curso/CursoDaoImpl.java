@@ -28,6 +28,12 @@ public class CursoDaoImpl implements CursoDao {
                                       "from curso " +
                                       "order by CurNome";
     
+    private final String stmtListarPorUniversidade = "select curso.CurId, CurNome, CurDataCad " +
+                                                     "from curso " +
+                                                     "   inner join universidade_curso " +
+                                                     "      on curso.CurId = universidade_curso.CurId " +
+                                                     "where UniId = ?";
+    
     private final String stmtSelecionar = "select CurId, CurNome, CurDataCad " +
                                           "from curso " +
                                           "where CurId = ?";
@@ -175,7 +181,7 @@ public class CursoDaoImpl implements CursoDao {
             }
             return lista;
         } catch (SQLException ex) {
-            throw new RuntimeException("Erro ao consultar uma lista de produtos. Origem=" + ex.getMessage());
+            throw new RuntimeException("Erro ao consultar uma lista de cursos. Origem=" + ex.getMessage());
         } finally {
             try {
                 result.close();
@@ -194,6 +200,51 @@ public class CursoDaoImpl implements CursoDao {
             }
         }
     }
+    
+    @Override
+    public List<Curso> Listar(int idUniversidade) {
+        Connection con = null;
+        PreparedStatement stmt = null;
+        ResultSet result = null;
+        
+        List<Curso> lista = new ArrayList();
+        
+        try {
+            con = ConnectionFactory.getConnection();
+            stmt = con.prepareStatement(stmtListarPorUniversidade);
+            stmt.setInt(1, idUniversidade);
+            result = stmt.executeQuery();
+            while (result.next()) {
+                Curso curso = new Curso(
+                        result.getInt("curso.CurId"), 
+                        result.getString("CurNome"), 
+                        result.getDate("CurDataCad")
+                );
+                
+                lista.add(curso);
+            }
+            return lista;
+        } catch (SQLException ex) {
+            throw new RuntimeException("Erro ao consultar uma lista de cursos. Origem=" + ex.getMessage());
+        } finally {
+            try {
+                result.close();
+            } catch (Exception ex) {
+                System.out.println("Erro ao fechar result set. Ex=" + ex.getMessage());
+            }
+            try {
+                stmt.close();
+            } catch (Exception ex) {
+                System.out.println("Erro ao fechar stmt. Ex=" + ex.getMessage());
+            }
+            try {
+                con.close();
+            } catch (Exception ex) {
+                System.out.println("Erro ao fechar conexão. Ex=" + ex.getMessage());
+            }
+        }
+    }
+    
     
     @Override
     public Curso Selecionar(int id) {

@@ -1,4 +1,3 @@
-
 <%@ page contentType="text/html; charset=ISO-8859-1" language="java" pageEncoding="UTF-8" import="java.sql.*" errorPage="" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
@@ -87,14 +86,14 @@
                 <table style="width: 100%">
                     <tr>
                         <td>
-                            <h1 class="title">Lista de Universidades</h1>
+                            <h1 class="title">Lista de Usuários</h1>
                         </td>
                         <td style="text-align: right">
-                            <a href="UniversidadeServlet?acao=novo" class="button is-primary">
+                            <a href="UsuarioServlet?acao=novo" class="button is-primary">
                                 <span class="icon is-small">
                                     <i class="fas fa-plus"></i>
                                 </span>
-                                <span>Nova Universidade</span>
+                                <span>Novo Usuário</span>
                             </a>
                         </td>
                     </tr>
@@ -103,13 +102,13 @@
             <div class="container">
                 <div class="field">
                     <div class="control">
-                        <input class="input" type="text" placeholder="Palavra-chave" id="tbPalavraChave" onkeyup="buscar(this, 'tbUniversidades')">
+                        <input class="input" type="text" placeholder="Palavra-chave" id="tbPalavraChave" onkeyup="buscar(this, 'tbUsuarios')">
                     </div>
                 </div>
                 
                 <label class="label help is-danger">${erro}</label>
                 
-                <table class="table is-fullwidth" id="tbUniversidades">
+                <table class="table is-fullwidth" id="tbUsuarios">
                     <thead>
                         <tr id="header"> 
                             <th style="width: 10%">
@@ -119,13 +118,13 @@
                                 Nome
                             </th>
                             <th style="width: 15%">
-                                Cidade
+                                E-mail
                             </th>
                             <th style="width: 5%">
-                                UF
+                                Direito
                             </th>
                             <th style="width: 15%">
-                                Qtd. Cursos
+                                Ativo
                             </th>
                             <th/>
                             <th/>
@@ -134,32 +133,32 @@
                     
                     <tbody>
                         
-                        <c:forEach var="universidade" items="${universidades}" varStatus="inf">
+                        <c:forEach var="usuario" items="${usuarios}" varStatus="inf">
                             <tr>
                                 <td>
-                                    ${universidade.getId()}
+                                    ${usuario.getId()}
                                 </td>
                                 <td>
-                                    ${universidade.getNome()}
+                                    ${usuario.getNome()}
                                 </td>
                                 <td>
-                                    ${universidade.getCidade().getNome()}
+                                    ${usuario.getEmail()}
                                 </td>
                                 <td>
-                                    ${universidade.getCidade().getEstado().getUf()}
+                                    ${usuario.getDireito()}
                                 </td>
                                 <td>
-                                    ${universidade.getCursos().size()}
+                                    ${usuario.getAtivo()}
                                 </td>
                                 <td>
-                                    <a href="UniversidadeServlet?acao=editar&id=${universidade.getId()}" class="button is-success is-outlined">
+                                    <a href="UsuarioServlet?acao=editar&id=${usuario.getId()}" class="button is-success is-outlined">
                                         <span class="icon is-small">
                                             <i class="fas fa-pencil-alt"></i>
                                         </span>
                                     </a>
                                 </td>
                                 <td>
-                                    <a href="UniversidadeServlet?acao=excluir&id=${universidade.getId()}" class="button is-danger is-outlined">
+                                    <a href="UsuarioServlet?acao=excluir&id=${usuario.getId()}" class="button is-danger is-outlined">
                                         <span class="icon is-small">
                                             <i class="fas fa-trash-alt"></i>
                                         </span>

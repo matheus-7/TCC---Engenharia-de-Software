@@ -127,7 +127,6 @@
                                 Ativo
                             </th>
                             <th/>
-                            <th/>
                         </tr>
                     </thead>
                     
@@ -148,19 +147,12 @@
                                     ${usuario.getDireito()}
                                 </td>
                                 <td>
-                                    ${usuario.getAtivo()}
+                                    <input type="checkbox" disabled <c:if test="${usuario.getAtivo()}">checked</c:if>>
                                 </td>
                                 <td>
                                     <a href="UsuarioServlet?acao=editar&id=${usuario.getId()}" class="button is-success is-outlined">
                                         <span class="icon is-small">
                                             <i class="fas fa-pencil-alt"></i>
-                                        </span>
-                                    </a>
-                                </td>
-                                <td>
-                                    <a href="UsuarioServlet?acao=excluir&id=${usuario.getId()}" class="button is-danger is-outlined">
-                                        <span class="icon is-small">
-                                            <i class="fas fa-trash-alt"></i>
                                         </span>
                                     </a>
                                 </td>

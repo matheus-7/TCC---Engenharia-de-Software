@@ -12,6 +12,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import models.Usuario;
 
 @WebServlet(name = "UsuarioServlet", urlPatterns = {"/UsuarioServlet"})
@@ -24,7 +25,16 @@ public class UsuarioServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             
+            Usuario usuario = new Usuario();
+            HttpSession session = request.getSession(true);
+            String acao = request.getParameter("acao");
             
+            if (acao == null) redirectUsuarios(request, response);
+            else if (acao.equals("novo")){
+                session.setAttribute("usuarioAnterior", new Usuario());
+                
+                redirectUsuarioCadastro(request, response, usuario);
+            }            
         }
     }
     

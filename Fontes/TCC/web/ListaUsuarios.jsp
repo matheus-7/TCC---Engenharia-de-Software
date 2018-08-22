@@ -1,4 +1,4 @@
-<%@ page contentType="text/html; charset=ISO-8859-1" language="java" pageEncoding="UTF-8" import="java.sql.*" errorPage="" %>
+<%@ page contentType="text/html; charset=UTF-8" language="java" pageEncoding="UTF-8" import="java.sql.*" errorPage="" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
@@ -114,16 +114,16 @@
                             <th style="width: 10%">
                                 ID
                             </th>
-                            <th style="width: 55%">
+                            <th style="width: 40%">
                                 Nome
                             </th>
-                            <th style="width: 15%">
+                            <th style="width: 35%">
                                 E-mail
                             </th>
                             <th style="width: 5%">
                                 Direito
                             </th>
-                            <th style="width: 15%">
+                            <th style="width: 10%">
                                 Ativo
                             </th>
                             <th/>

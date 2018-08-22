@@ -135,6 +135,11 @@ public class Usuario {
         this.audioAtivo = audioAtivo;
     }
     
+    public int getCodigoAtivo(){
+        if (this.getAtivo()) return 1;
+        else return 0;
+    }
+    
     public String getSenhaCriptografada(String password){
         int contador, tamanho,codigoASCII;
         

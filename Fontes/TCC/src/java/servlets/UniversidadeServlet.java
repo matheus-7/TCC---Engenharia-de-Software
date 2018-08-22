@@ -76,9 +76,9 @@ public class UniversidadeServlet extends HttpServlet {
 
                     Universidade universidadeAnterior = (Universidade)session.getAttribute("universidadeAnterior");
                     
-                    String nomeAnterior = universidadeAnterior.getNome();
+                    int idAnterior = universidadeAnterior.getId();
                     
-                    if (!UniversidadeDao.Existe(universidade, nomeAnterior)){
+                    if (!UniversidadeDao.Existe(universidade, idAnterior)){
                         if (id != 0) UniversidadeDao.Atualizar(universidade);
                         else UniversidadeDao.Inserir(universidade);
                     }

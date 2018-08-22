@@ -13,7 +13,7 @@ import java.util.ArrayList;
 
 public class CursoDaoImpl implements CursoDao {
 
-    private final String stmtAtualizar = "update curso set CurNome = ?, CurDataCad = ? " +
+    private final String stmtAtualizar = "update curso set CurNome = ? " +
                                          "where CurId = ?";
     
     private final String stmtExcluir = "delete from curso where CurId = ?";
@@ -47,8 +47,7 @@ public class CursoDaoImpl implements CursoDao {
             con = ConnectionFactory.getConnection();
             stmt = con.prepareStatement(stmtAtualizar);
             stmt.setString(1, curso.getNome());
-            stmt.setTimestamp(2, new java.sql.Timestamp(curso.getDataCadastro().getTime()));
-            stmt.setInt(3, curso.getId());
+            stmt.setInt(2, curso.getId());
             stmt.executeUpdate();
         } catch (SQLException ex) {
             throw new RuntimeException("Erro ao atualizar um curso no banco de dados. Origem=" + ex.getMessage());

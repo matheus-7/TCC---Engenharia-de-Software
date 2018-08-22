@@ -14,7 +14,7 @@ import models.Universidade;
 
 public class UniversidadeDaoImpl implements UniversidadeDao {
 
-    private final String stmtAtualizar = "update universidade set CidId = ?, UniNome = ?, UniDataCad = ? " +
+    private final String stmtAtualizar = "update universidade set CidId = ?, UniNome = ? " +
                                          "where UniId = ?";
     
     private final String stmtExcluir = "delete from universidade " + 
@@ -23,7 +23,7 @@ public class UniversidadeDaoImpl implements UniversidadeDao {
     private final String stmtExiste = "select UniId " +
                                       "from universidade " + 
                                       "where UniNome = ? " + 
-                                      "   and UniNome != ?";
+                                      "   and UniId != ?";
     
     private final String stmtInserir = "insert into universidade (CidId, UniNome, UniDataCad) values (?, ?, ?)";
     
@@ -36,7 +36,7 @@ public class UniversidadeDaoImpl implements UniversidadeDao {
                                           "where UniId = ?";
     
     @Override
-    public boolean Existe(Universidade universidade, String nomeAnterior) {
+    public boolean Existe(Universidade universidade, int idAnterior) {
         Connection con = null;
         PreparedStatement stmt = null;
         ResultSet rs = null;
@@ -45,8 +45,10 @@ public class UniversidadeDaoImpl implements UniversidadeDao {
             
             con = ConnectionFactory.getConnection();
             stmt = con.prepareStatement(stmtExiste);
+            
             stmt.setString(1, universidade.getNome());
-            stmt.setString(2, nomeAnterior);
+            stmt.setInt(2, idAnterior);
+            
             rs = stmt.executeQuery();
             while (rs.next()) {
                 existe = true;
@@ -171,8 +173,7 @@ public class UniversidadeDaoImpl implements UniversidadeDao {
             stmt = con.prepareStatement(stmtAtualizar);
             stmt.setInt(1, universidade.getCidade().getId());
             stmt.setString(2, universidade.getNome());
-            stmt.setTimestamp(3, new java.sql.Timestamp(universidade.getDataCadastro().getTime()));
-            stmt.setInt(4, universidade.getId());
+            stmt.setInt(3, universidade.getId());
             stmt.executeUpdate();
         } catch (SQLException ex) {
             throw new RuntimeException("Erro ao atualizar uma universidade no banco de dados. Origem=" + ex.getMessage());

@@ -1,5 +1,5 @@
 
-<%@page contentType="text/html; charset=ISO-8859-1" language="java" pageEncoding="UTF-8" import="java.sql.*" errorPage="" %>
+<%@page contentType="text/html; charset=UTF-8" language="java" pageEncoding="UTF-8" import="java.sql.*" errorPage="" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
@@ -7,6 +7,7 @@
         <title>Painel Administrativo</title>
         
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta charset="UTF-8">
         
         <link rel="stylesheet" href="bulma-0.7.0\css\bulma.min.css">
         <link rel="stylesheet" href="Jquery/jquery-ui.css" />

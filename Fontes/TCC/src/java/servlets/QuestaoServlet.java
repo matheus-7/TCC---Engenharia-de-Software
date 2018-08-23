@@ -1,6 +1,8 @@
 
 package servlets;
 
+import daos.area.AreaDao;
+import daos.area.AreaDaoImpl;
 import daos.questao.QuestaoDao;
 import daos.questao.QuestaoDaoImpl;
 import java.io.IOException;
@@ -12,6 +14,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import models.AreaDeConhecimento;
 import models.Questao;
 
 
@@ -19,6 +22,7 @@ import models.Questao;
 public class QuestaoServlet extends HttpServlet {
     
     QuestaoDao QuestaoDao = new QuestaoDaoImpl();
+    AreaDao AreaDao = new AreaDaoImpl();
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -29,20 +33,29 @@ public class QuestaoServlet extends HttpServlet {
             HttpSession session = request.getSession(true);
             String acao = request.getParameter("acao");
             
-            if (acao == null) redirectQuestoes(request, response);            
+            if (acao == null) redirectQuestoes(request, response); 
+            else if (acao.equals("novo")){
+                session.setAttribute("questaoAnterior", new Questao());
+                
+                redirectQuestaoCadastro(request, response, questao);
+            }
         }
     }
     
     private void redirectQuestoes(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-//        List<Questao> questoes = QuestaoDao.Listar();
-//        request.setAttribute("questoes", questoes);
+        List<Questao> questoes = QuestaoDao.Listar();
+        request.setAttribute("questoes", questoes);
         request.getRequestDispatcher("/ListaQuestoes.jsp").forward(request, response);
     }
     
     private void redirectQuestaoCadastro(HttpServletRequest request, HttpServletResponse response, Questao questao)
             throws ServletException, IOException {
+        List<AreaDeConhecimento> areas = AreaDao.Listar();
+                
+        request.setAttribute("areas", areas);
         request.setAttribute("questao", questao);
+        
         request.getRequestDispatcher("/FormQuestao.jsp").forward(request, response);
     }
 

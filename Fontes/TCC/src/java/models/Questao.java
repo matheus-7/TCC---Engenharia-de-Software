@@ -62,7 +62,7 @@ public class Questao {
     public Questao(){};
     
     public Questao(int id, String descricao, Boolean ativa, AreaDeConhecimento areaConhecimento, 
-                   List<Alternativa> alternativas, Date dataCadasrto){
+                   List<Alternativa> alternativas, Date dataCadastro){
         this.id = id;
         this.descricao = descricao;
         this.ativa = ativa;

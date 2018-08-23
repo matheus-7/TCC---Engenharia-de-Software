@@ -134,6 +134,7 @@
                                 </td>
                                 <td>
                                     ${questao.getDescricao()}
+                                    <input type="hidden" value="${questao.getAreaConhecimento().getNome()}"
                                 </td>
                                 <td>
                                     <input type="checkbox" disabled <c:if test="${questao.getAtiva()}">checked</c:if>>

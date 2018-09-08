@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#9FC5F8"
+    android:padding="20dp">
+    
+    <ImageView
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:src="@drawable/ic_default"
+        android:layout_gravity="center"/>
+    
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="PREPARAÇÃO PARA O ENEM"
+        android:textColor="#003762"
+        android:textStyle="bold"
+        android:textSize="17dp"
+        android:layout_marginTop="5dp"
+        android:layout_gravity="center"/>
+
+</LinearLayout>

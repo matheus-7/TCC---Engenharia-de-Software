@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ListaAreasFragment">
+
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.25"
+            android:background="#E69138"
+            android:text="Linguagens, Códigos e Suas Tecnologias"
+            android:textColor="#EEEDED"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:drawableRight="@drawable/ic_alfabeto"/>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.25"
+            android:background="#F1C232"
+            android:text="Ciências Humanas e Suas Tecnologias"
+            android:textColor="#EEEDED"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:drawableLeft="@drawable/ic_social"/>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.25"
+            android:background="#674EA7"
+            android:text="Matemática e Suas Tecnologias"
+            android:textColor="#EEEDED"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:drawableRight="@drawable/ic_calculadora"/>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.25"
+            android:background="#A64D79"
+            android:text="Ciências da Natureza e Suas Tecnologias"
+            android:textColor="#EEEDED"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:drawableLeft="@drawable/ic_arvore"/>
+
+    </LinearLayout>
+
+</FrameLayout>

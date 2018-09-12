@@ -7,6 +7,7 @@ import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.Produces;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PUT;
 import javax.ws.rs.PathParam;
@@ -29,5 +30,13 @@ public class UsuarioResource {
     public Usuario existe(@PathParam("email") String email) {
         return UsuarioDAO.ExisteEmail(email);
     }
-
+    
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Usuario inserir(Usuario usuario) {
+        UsuarioDAO.Inserir(usuario);
+        
+        return usuario;
+    }
 }

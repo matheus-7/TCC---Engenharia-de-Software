@@ -16,6 +16,9 @@ public class UsuarioDAO {
                                       "where UsuEmail = ? " +         
                                       "order by UsuNome";
     
+    private String SQL_INSERIR = "insert into usuario (UsuNome, UsuEmail, UsuSenha, UsuDireito, UsuAtivo, UsuDataCad) " +
+                                 "             values (?,       ?,        ?,        ?,          ?,        ?         ) ";
+    
     public Usuario ExisteEmail(String email) {
         Connection con = null;
         PreparedStatement stmt = null;
@@ -69,6 +72,48 @@ public class UsuarioDAO {
                 System.out.println("Erro ao fechar conexão. Ex=" + ex.getMessage());
             }
         }
+    }
+    
+    public void Inserir(Usuario usuario) {
+        Connection con = null;
+        PreparedStatement stmt = null;
+        try {
+            if (usuario.getNome() != null){
+                con = ConnectionFactory.getConnection();
+                stmt = con.prepareStatement(SQL_INSERIR, PreparedStatement.RETURN_GENERATED_KEYS);
+                
+                stmt.setString(1, usuario.getNome());
+                stmt.setString(2, usuario.getEmail());
+                stmt.setString(3, usuario.getSenhaCriptografada(usuario.getSenha()));
+                stmt.setString(4, "Usuário");
+                stmt.setInt(5, 1);
+                stmt.setTimestamp(6, new java.sql.Timestamp(System.currentTimeMillis()));
+                
+                stmt.executeUpdate();
+                
+                usuario.setId(getId(stmt));
+            }
+        } catch (SQLException ex) {
+            throw new RuntimeException("Erro ao inserir um usuário no banco de dados. Origem=" + ex.getMessage());
+        } finally {
+            try {
+                stmt.close();
+            } catch (Exception ex) {
+                System.out.println("Erro ao fechar stmt. Ex=" + ex.getMessage());
+            }
+            try {
+                con.close();
+            } catch (Exception ex) {
+                System.out.println("Erro ao fechar conexão. Ex=" + ex.getMessage());
+            }
+        }
+    }
+    
+    private int getId(PreparedStatement stmt) throws SQLException {
+        ResultSet rs = stmt.getGeneratedKeys();
+        rs.next();
+        
+        return rs.getInt(1);
     }
     
 }

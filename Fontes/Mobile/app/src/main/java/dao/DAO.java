@@ -1,5 +1,7 @@
 package dao;
 
+import android.os.AsyncTask;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -17,7 +19,7 @@ public class DAO {
 
     private OkHttpClient client;
     public static final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
-    private final String API_URL = "http://192.168.1.103:8084/api-web/api";
+    private final String API_URL = "http://192.168.1.103:8084/TCC_API/api";
     private static Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
 
     public DAO() {

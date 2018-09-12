@@ -1,6 +1,10 @@
 package com.enem.prep.mobile;
 
+import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -34,15 +38,7 @@ public class NovaContaActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Usuario usuario = montarUsuario();
 
-                String mensagem = validarUsuario(usuario);
-
-                if (mensagem.equals("")){
-                    Intent intentListaAreas = new Intent(NovaContaActivity.this, MainActivity.class);
-                    startActivity(intentListaAreas);
-                }
-                else{
-                    NovaContaActivity.this.showToast(mensagem);
-                }
+                inserirUsuario(usuario);
             }
         });
     }
@@ -59,21 +55,16 @@ public class NovaContaActivity extends AppCompatActivity {
         return usuario;
     }
 
-    private String validarUsuario(Usuario usuario){
+    private void inserirUsuario(Usuario usuario){
         if (usuario.getNome().equals("") ||
             usuario.getEmail().equals("") ||
-            usuario.getSenha().equals("")) return "Preencha todos os campos para prosseguir!";
+            usuario.getSenha().equals("")){
+            showToast("Preencha todos os campos para prosseguir!");
 
-        JSONObject obj = usuarioDAO.ExisteEmail(usuario.getEmail());
-
-        try{
-            if (obj == null || obj.getString("id").equals("0")) return "O e-mail informado já está sendo utilizado por outro usuário!";
-        }
-        catch (Exception e){
-            this.showToast("Não foi possível realizar o cadastro. Tente novamente mais tarde!");
+            return;
         }
 
-        return "";
+        new ExisteEmailTask(usuario, this).execute();
     }
 
     private void getCampos(){
@@ -82,9 +73,106 @@ public class NovaContaActivity extends AppCompatActivity {
         edtSenha = (EditText) findViewById(R.id.edtSenha);
     }
 
-    public void showToast(String mensagem) {
+    private void showToast(String mensagem) {
         Toast.makeText(this, mensagem, Toast.LENGTH_SHORT).show();
     }
 
+    private void salvarLogin(Usuario usuario){
+        SharedPreferences prefs = getSharedPreferences("Preferencias", 0);
+        SharedPreferences.Editor editor = prefs.edit();
 
+        editor.putBoolean("estaLogado", true);
+        editor.putString("email", usuario.getEmail());
+
+        editor.commit();
+    }
+
+
+    private class ExisteEmailTask extends AsyncTask<String, Void, String> {
+
+        private Activity activity;
+        private ProgressDialog dialog;
+        private Usuario usuario;
+
+        public ExisteEmailTask(Usuario usuario, Activity activity) {
+            this.usuario = usuario;
+            this.activity = activity;
+        }
+
+        @Override
+        protected String doInBackground(String... params) {
+            try{
+                JSONObject obj = usuarioDAO.ExisteEmail(usuario.getEmail());
+
+                if (obj == null || !obj.getString("id").equals("0")) return "O e-mail informado já está sendo utilizado por outro usuário!";
+            }
+            catch (Exception e){
+                return "Não foi possível realizar o cadastro. Tente novamente mais tarde!";
+            }
+
+            return "";
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            dialog.dismiss();
+
+            if (result.equals("")) new InserirTask(usuario, activity).execute();
+            else showToast(result);
+        }
+
+        @Override
+        protected void onPreExecute() {
+            dialog = new ProgressDialog(activity);
+            dialog.setIndeterminate(true);
+            dialog.setMessage("Carregando...");
+            dialog.show();
+        }
+    }
+
+
+    private class InserirTask extends AsyncTask<String, Void, String> {
+
+        private Activity activity;
+        private ProgressDialog dialog;
+        private Usuario usuario;
+
+        public InserirTask(Usuario usuario, Activity activity) {
+            this.usuario = usuario;
+            this.activity = activity;
+        }
+
+        @Override
+        protected String doInBackground(String... params) {
+            try{
+                JSONObject obj = usuarioDAO.Salvar(usuario);
+            }
+            catch (Exception e){
+                return "Não foi possível realizar o cadastro. Tente novamente mais tarde!";
+            }
+
+            salvarLogin(usuario);
+
+            return "";
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            dialog.dismiss();
+
+            if (!result.equals("")) showToast(result);
+            else{
+                Intent intentEntrar = new Intent(activity, MainActivity.class);
+                startActivity(intentEntrar);
+            }
+        }
+
+        @Override
+        protected void onPreExecute() {
+            dialog = new ProgressDialog(activity);
+            dialog.setIndeterminate(true);
+            dialog.setMessage("Carregando...");
+            dialog.show();
+        }
+    }
 }

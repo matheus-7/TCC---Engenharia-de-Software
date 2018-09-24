@@ -3,13 +3,54 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#9FC5F8"
     tools:context=".AvaliarFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Avaliar"
-        android:textSize="60sp"/>
+        android:orientation="vertical">
+
+        <RatingBar
+            android:id="@+id/rbNota"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="0.10"
+            android:numStars="5"
+            android:rating="10"
+            android:layout_gravity="center"
+            android:progressTint="@color/yellow"/>
+
+        <EditText
+            android:id="@+id/edtComentario"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.40"
+            android:hint="Deixe uma mensagem"
+            android:inputType="textMultiLine"
+            android:background="@color/white"
+            android:lines="8"
+            android:gravity="top|left"
+            android:scrollbars="vertical"/>
+
+        <Button
+            android:id="@+id/btnEnviar"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.10"
+            android:background="#003762"
+            android:text="Enviar"
+            android:textColor="#EEEDED"
+            android:textSize="20sp"
+            android:textStyle="bold"/>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.40"
+            android:visibility="invisible"/>
+
+    </LinearLayout>
 
 </FrameLayout>

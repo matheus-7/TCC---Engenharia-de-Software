@@ -10,7 +10,7 @@ import model.Usuario;
 
 public class UsuarioDAO {
     
-    private String SQL_EXISTE_EMAIL = "select UsuId, CurId, UniId, CidId, UsuNome, UsuEmail, UsuSenha, UsuDireito, UsuAtivo, " +
+    private String SQL_SELECIONAR = "select UsuId, CurId, UniId, CidId, UsuNome, UsuEmail, UsuSenha, UsuDireito, UsuAtivo, " +
                                       "       UsuDataNasc, UsuDataCad, UsuAudio " +
                                       "from usuario " +
                                       "where UsuEmail = ? " +         
@@ -19,13 +19,13 @@ public class UsuarioDAO {
     private String SQL_INSERIR = "insert into usuario (UsuNome, UsuEmail, UsuSenha, UsuDireito, UsuAtivo, UsuDataCad) " +
                                  "             values (?,       ?,        ?,        ?,          ?,        ?         ) ";
     
-    public Usuario ExisteEmail(String email) {
+    public Usuario Selecionar(String email) {
         Connection con = null;
         PreparedStatement stmt = null;
         ResultSet result = null;
         try {
             con = dao.ConnectionFactory.getConnection();
-            stmt = con.prepareStatement(SQL_EXISTE_EMAIL);
+            stmt = con.prepareStatement(SQL_SELECIONAR);
             stmt.setString(1, email);
             result = stmt.executeQuery();
             Usuario usuario = new Usuario();
@@ -73,7 +73,7 @@ public class UsuarioDAO {
             }
         }
     }
-    
+       
     public void Inserir(Usuario usuario) {
         Connection con = null;
         PreparedStatement stmt = null;

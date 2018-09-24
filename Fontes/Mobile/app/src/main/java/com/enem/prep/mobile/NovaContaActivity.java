@@ -17,6 +17,8 @@ import org.json.JSONObject;
 import dao.UsuarioDAO;
 import models.Usuario;
 
+import static java.lang.Integer.parseInt;
+
 public class NovaContaActivity extends AppCompatActivity {
 
     private EditText edtNome = null;
@@ -83,6 +85,8 @@ public class NovaContaActivity extends AppCompatActivity {
 
         editor.putBoolean("estaLogado", true);
         editor.putString("email", usuario.getEmail());
+        editor.putString("senha", usuario.getSenhaCriptografada(usuario.getSenha()));
+        editor.putInt("idUsuario", usuario.getId());
 
         editor.commit();
     }
@@ -102,7 +106,7 @@ public class NovaContaActivity extends AppCompatActivity {
         @Override
         protected String doInBackground(String... params) {
             try{
-                JSONObject obj = usuarioDAO.ExisteEmail(usuario.getEmail());
+                JSONObject obj = usuarioDAO.Selecionar(usuario.getEmail());
 
                 if (obj == null || !obj.getString("id").equals("0")) return "O e-mail informado já está sendo utilizado por outro usuário!";
             }
@@ -146,13 +150,14 @@ public class NovaContaActivity extends AppCompatActivity {
         protected String doInBackground(String... params) {
             try{
                 JSONObject obj = usuarioDAO.Salvar(usuario);
+
+                usuario.setId(parseInt(obj.getString("id")));
+
+                salvarLogin(usuario);
             }
             catch (Exception e){
                 return "Não foi possível realizar o cadastro. Tente novamente mais tarde!";
             }
-
-            salvarLogin(usuario);
-
             return "";
         }
 

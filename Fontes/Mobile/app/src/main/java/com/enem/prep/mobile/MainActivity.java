@@ -1,5 +1,7 @@
 package com.enem.prep.mobile;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -77,7 +79,8 @@ public class MainActivity extends AppCompatActivity {
                 fragmentClass = AvaliarFragment.class;
                 break;
             case R.id.sair:
-                break;
+                sair();
+                return;
             default:
                 fragmentClass = ListaAreasFragment.class;
         }
@@ -105,6 +108,18 @@ public class MainActivity extends AppCompatActivity {
                 return false;
             }
         });
+    }
+
+    private void sair(){
+        SharedPreferences prefs = getSharedPreferences("Preferencias", 0);
+        SharedPreferences.Editor editor = prefs.edit();
+
+        editor.clear();
+        editor.putBoolean("estaLogado", false);
+        editor.commit();
+
+        Intent intentSair = new Intent(MainActivity.this, LoginActivity.class);
+        startActivity(intentSair);
     }
 
 }

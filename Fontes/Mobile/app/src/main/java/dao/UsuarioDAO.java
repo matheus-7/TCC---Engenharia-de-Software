@@ -14,9 +14,9 @@ public class UsuarioDAO {
     private static Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
     private DAO dao = new DAO();
 
-    public JSONObject ExisteEmail(String email) {
+    public JSONObject Selecionar(String email) {
         try {
-            String data = dao.doGet("/usuario/existe/" + email);
+            String data = dao.doGet("/usuario/" + email);
             JSONObject jObject = new JSONObject(data);
 
             return jObject;

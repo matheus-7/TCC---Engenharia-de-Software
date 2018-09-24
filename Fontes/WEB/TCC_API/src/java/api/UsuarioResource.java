@@ -25,10 +25,10 @@ public class UsuarioResource {
     }
 
     @GET
-    @Path("/existe/{email}")
+    @Path("/{email}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Usuario existe(@PathParam("email") String email) {
-        return UsuarioDAO.ExisteEmail(email);
+    public Usuario selecionar(@PathParam("email") String email) {
+        return UsuarioDAO.Selecionar(email);
     }
     
     @POST

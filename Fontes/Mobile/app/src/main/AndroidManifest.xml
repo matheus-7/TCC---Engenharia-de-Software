@@ -13,16 +13,24 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".LoginActivity">
+        <activity
+            android:name=".LoginActivity"
+            android:noHistory="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".RecuperarSenhaActivity" />
-        <activity android:name=".NovaContaActivity" />
-        <activity android:name=".MainActivity"></activity>
+        <activity
+            android:name=".RecuperarSenhaActivity"
+            android:noHistory="true"/>
+        <activity
+            android:name=".NovaContaActivity"
+            android:noHistory="true"/>
+        <activity
+            android:name=".MainActivity"
+            android:noHistory="true" />
     </application>
 
 </manifest>

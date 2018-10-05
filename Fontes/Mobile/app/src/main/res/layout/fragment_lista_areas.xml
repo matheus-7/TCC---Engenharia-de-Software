@@ -12,6 +12,7 @@
         android:orientation="vertical">
 
         <Button
+            android:id="@+id/btnLinguagens"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="0.25"
@@ -23,6 +24,7 @@
             android:drawableRight="@drawable/ic_alfabeto"/>
 
         <Button
+            android:id="@+id/btnHumanas"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="0.25"
@@ -34,6 +36,7 @@
             android:drawableLeft="@drawable/ic_social"/>
 
         <Button
+            android:id="@+id/btnMatematica"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="0.25"
@@ -45,6 +48,7 @@
             android:drawableRight="@drawable/ic_calculadora"/>
 
         <Button
+            android:id="@+id/btnNatureza"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="0.25"

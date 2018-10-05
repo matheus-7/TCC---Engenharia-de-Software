@@ -5,4 +5,8 @@
     <color name="colorAccent">#FF4081</color>
     <color name="yellow">#FFD700</color>
     <color name="white">#FFFFFF</color>
+    <color name="Linguagens">#E69138</color>
+    <color name="Humanas">#F1C232</color>
+    <color name="Matemática">#674EA7</color>
+    <color name="Natureza">#A64D79</color>
 </resources>

@@ -24,13 +24,14 @@
         </activity>
         <activity
             android:name=".RecuperarSenhaActivity"
-            android:noHistory="true"/>
+            android:noHistory="true" />
         <activity
             android:name=".NovaContaActivity"
-            android:noHistory="true"/>
+            android:noHistory="true" />
         <activity
             android:name=".MainActivity"
             android:noHistory="true" />
+        <activity android:name=".RespostasActivity"></activity>
     </application>
 
 </manifest>

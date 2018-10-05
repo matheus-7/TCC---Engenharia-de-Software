@@ -50,6 +50,10 @@ public class Questao implements Serializable {
         return alternativas;
     }
 
+    public void setAlternativas(List<Alternativa> alternativas){
+        this.alternativas = alternativas;
+    }
+
     public Date getDataCadastro(){
         return dataCadastro;
     }

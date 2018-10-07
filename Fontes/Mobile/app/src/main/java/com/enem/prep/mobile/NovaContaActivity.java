@@ -127,9 +127,9 @@ public class NovaContaActivity extends AppCompatActivity {
 
         @Override
         protected void onPreExecute() {
-            dialog = new ProgressDialog(activity);
-            dialog.setIndeterminate(true);
+            dialog = new ProgressDialog(activity, R.style.MyAlertDialogStyle);
             dialog.setMessage("Carregando...");
+            dialog.setIndeterminate(true);
             dialog.show();
         }
     }
@@ -174,9 +174,9 @@ public class NovaContaActivity extends AppCompatActivity {
 
         @Override
         protected void onPreExecute() {
-            dialog = new ProgressDialog(activity);
-            dialog.setIndeterminate(true);
+            dialog = new ProgressDialog(activity, R.style.MyAlertDialogStyle);
             dialog.setMessage("Carregando...");
+            dialog.setIndeterminate(true);
             dialog.show();
         }
     }

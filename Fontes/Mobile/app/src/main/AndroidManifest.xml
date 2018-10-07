@@ -31,7 +31,9 @@
         <activity
             android:name=".MainActivity"
             android:noHistory="true" />
-        <activity android:name=".RespostasActivity"></activity>
+        <activity
+            android:name=".RespostasActivity"
+            android:noHistory="true" />
     </application>
 
 </manifest>

@@ -18,6 +18,7 @@ public class ApplicationConfig extends Application {
         resources.add(api.AlternativaResource.class);
         resources.add(api.AvaliacaoResource.class);
         resources.add(api.QuestaoResource.class);
+        resources.add(api.RespostaResource.class);
         resources.add(api.UsuarioResource.class);
     }
     

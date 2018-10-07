@@ -3,18 +3,103 @@
     android:id="@+id/llActivityRespostas"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="#9FC5F8">
+    android:orientation="vertical">
 
-    <Button
-        android:id="@+id/btnTeste"
+    <ScrollView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/svRespostas"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="0.10"
-        android:background="#597EAA"
-        android:text="Teste"
-        android:textColor="#EEEDED"
-        android:textSize="20sp"
-        android:textStyle="bold"/>
+        android:layout_height="match_parent">
 
+        <LinearLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/llItens"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tvQuestao"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="#EEEDED"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:textAlignment="center"
+                android:layout_margin="5sp"/>
+
+            <Button
+                android:id="@+id/btnAlternativa1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/btn_alternativa"
+                android:textColor="#000000"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:textAlignment="center"
+                android:padding="10sp"
+                android:layout_margin="5sp"/>
+
+            <Button
+                android:id="@+id/btnAlternativa2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/btn_alternativa"
+                android:textColor="#000000"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:textAlignment="center"
+                android:padding="10sp"
+                android:layout_margin="5sp"/>
+
+            <Button
+                android:id="@+id/btnAlternativa3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/btn_alternativa"
+                android:textColor="#000000"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:textAlignment="center"
+                android:padding="10sp"
+                android:layout_margin="5sp"/>
+
+            <Button
+                android:id="@+id/btnAlternativa4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/btn_alternativa"
+                android:textColor="#000000"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:textAlignment="center"
+                android:padding="10sp"
+                android:layout_margin="5sp"/>
+
+            <Button
+                android:id="@+id/btnAlternativa5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/btn_alternativa"
+                android:textColor="#000000"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:textAlignment="center"
+                android:padding="10sp"
+                android:layout_margin="5sp"/>
+
+            <TextView
+                android:id="@+id/tvPontuacao"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textColor="#EEEDED"
+                android:textSize="40sp"
+                android:textStyle="bold"
+                android:padding="10sp"
+                android:textAlignment="center"
+                android:gravity="center_vertical"
+                android:visibility="invisible"/>
+
+        </LinearLayout>
+    </ScrollView>
 </LinearLayout>

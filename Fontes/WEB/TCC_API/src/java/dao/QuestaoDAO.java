@@ -17,6 +17,7 @@ public class QuestaoDAO {
                                 "   inner join area_conhecimento " +
                                 "      on questao.AreaId = area_conhecimento.AreaId " +
                                 "where questao.AreaId = ? " +
+                                "   and QuesAtiva = 1 " +
                                 "order by RAND() " +
                                 "limit 5";  
     

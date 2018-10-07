@@ -9,4 +9,7 @@
     <color name="Humanas">#F1C232</color>
     <color name="Matemática">#674EA7</color>
     <color name="Natureza">#A64D79</color>
+    <color name="Correta">#33CC33</color>
+    <color name="Incorreta">#FF0000</color>
+    <color name="Default">#9FC5F8</color>
 </resources>

@@ -31,7 +31,7 @@ CREATE TABLE area_conhecimento (
 
 CREATE TABLE conquista_config (
   ConConfId INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
-  ConConfTitulo INTEGER UNSIGNED NULL,
+  ConConfTitulo VARCHAR(50) NULL,
   ConConfDesc VARCHAR(255) NULL,
   CONSTRAINT pk_conquista_config PRIMARY KEY(ConConfId)
 );

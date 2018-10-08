@@ -11,10 +11,10 @@ import model.Usuario;
 public class UsuarioDAO {
     
     private String SQL_SELECIONAR = "select UsuId, CurId, UniId, CidId, UsuNome, UsuEmail, UsuSenha, UsuDireito, UsuAtivo, " +
-                                      "       UsuDataNasc, UsuDataCad, UsuAudio " +
-                                      "from usuario " +
-                                      "where UsuEmail = ? " +         
-                                      "order by UsuNome";
+                                    "       UsuDataNasc, UsuDataCad, UsuAudio " +
+                                    "from usuario " +
+                                    "where UsuEmail = ? " +         
+                                    "order by UsuNome";
     
     private String SQL_INSERIR = "insert into usuario (UsuNome, UsuEmail, UsuSenha, UsuDireito, UsuAtivo, UsuDataCad) " +
                                  "             values (?,       ?,        ?,        ?,          ?,        ?         ) ";

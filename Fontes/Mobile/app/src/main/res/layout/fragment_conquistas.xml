@@ -3,13 +3,43 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#9FC5F8"
     tools:context=".ConquistasFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Conquistas"
-        android:textSize="60sp" />
+        android:orientation="vertical">
+
+        <LinearLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:padding="5sp">
+
+            <Button
+                android:id="@+id/btnUserConquistas"
+                android:layout_width="56dp"
+                android:layout_height="56dp"
+                android:background="@drawable/fundo_user"
+                android:textSize="30sp"
+                android:textColor="@color/colorPrimary"
+                android:stateListAnimator="@null" />
+
+            <TextView
+                android:id="@+id/tvNomeUsuario"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="#000000"
+                android:textSize="17sp"
+                android:textStyle="bold"
+                android:gravity="center_vertical"
+                android:layout_marginLeft="6dp" />
+
+        </LinearLayout>
+
+    </LinearLayout>
 
 </FrameLayout>

@@ -58,6 +58,8 @@ public class MainActivity extends AppCompatActivity {
     public void selectItemDrawer(MenuItem menuItem){
         Fragment fragment = null;
         Class fragmentClass = null;
+        Bundle bundle = new Bundle();
+        SharedPreferences prefs = getSharedPreferences("Preferencias", 0);
 
         switch (menuItem.getItemId()){
             case R.id.home:
@@ -71,6 +73,8 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case R.id.conquistas:
                 fragmentClass = ConquistasFragment.class;
+                bundle.putInt("idUsuario", prefs.getInt("idUsuario", 0));
+
                 break;
             case R.id.ranking:
                 fragmentClass = RankingFragment.class;
@@ -87,6 +91,8 @@ public class MainActivity extends AppCompatActivity {
 
         try{
             fragment = (Fragment) fragmentClass.newInstance();
+
+            fragment.setArguments(bundle);
         }
         catch (Exception e){
             e.printStackTrace();

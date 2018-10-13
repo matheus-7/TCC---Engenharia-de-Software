@@ -12,4 +12,6 @@
         android:text="Estatísticas"
         android:textSize="60sp" />
 
+
+
 </FrameLayout>

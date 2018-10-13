@@ -3,11 +3,6 @@
   <component name="WizardSettings">
     <option name="children">
       <map>
-        <entry key="imageWizard">
-          <value>
-            <PersistentState />
-          </value>
-        </entry>
         <entry key="vectorWizard">
           <value>
             <PersistentState>
@@ -23,7 +18,7 @@
                                 <PersistentState>
                                   <option name="values">
                                     <map>
-                                      <entry key="url" value="jar:file:/C:/Program%20Files/Android/Android%20Studio/plugins/android/lib/android.jar!/images/material_design_icons/social/ic_whatshot_black_24dp.xml" />
+                                      <entry key="url" value="jar:file:/C:/Program%20Files/Android/Android%20Studio/plugins/android/lib/android.jar!/images/material_design_icons/action/ic_date_range_black_24dp.xml" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -33,9 +28,9 @@
                         </option>
                         <option name="values">
                           <map>
-                            <entry key="color" value="003762" />
-                            <entry key="outputName" value="ic_conquistas" />
-                            <entry key="sourceFile" value="C:\Users\maath\Downloads\ic_house.svg" />
+                            <entry key="color" value="eeeded" />
+                            <entry key="outputName" value="ic_calendar" />
+                            <entry key="sourceFile" value="C:\Users\maath" />
                           </map>
                         </option>
                       </PersistentState>

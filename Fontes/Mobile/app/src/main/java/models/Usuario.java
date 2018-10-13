@@ -115,9 +115,13 @@ public class Usuario implements Serializable {
         return conquistas;
     }
 
+    public void setConquistas(List<Conquista> conquistas) { this.conquistas = conquistas; }
+
     public List<Resposta> getRespostas(){
         return respostas;
     }
+
+    public void setRespostas(List<Resposta> respostas) { this.respostas = respostas; }
 
     public Date getData(){
         return dataCadastro;

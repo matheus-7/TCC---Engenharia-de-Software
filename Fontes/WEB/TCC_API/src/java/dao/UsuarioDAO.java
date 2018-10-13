@@ -5,6 +5,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import model.Usuario;
 
 
@@ -18,6 +19,12 @@ public class UsuarioDAO {
     
     private String SQL_INSERIR = "insert into usuario (UsuNome, UsuEmail, UsuSenha, UsuDireito, UsuAtivo, UsuDataCad) " +
                                  "             values (?,       ?,        ?,        ?,          ?,        ?         ) ";
+    
+    private String SQL_ATUALIZAR = "update usuario set UsuNome = ?, " +
+                                   "                   CidId = ?, " +
+                                   "                   UniId = ?, " +
+                                   "                   CurId = ? " +
+                                   "where UsuId = ? " ;    
     
     public Usuario Selecionar(String email) {
         Connection con = null;
@@ -41,10 +48,10 @@ public class UsuarioDAO {
                         result.getString("UsuDireito"),
                         ativo,
                         null,
-                        null,
+                        new CidadeDAO().Selecionar(result.getInt("CidId")),
                         result.getDate("UsuDataNasc"),
-                        null,
-                        null,
+                        new UniversidadeDAO().Selecionar(result.getInt("UniId")),
+                        new CursoDAO().Selecionar(result.getInt("CurId")),
                         null,
                         null,
                         result.getDate("UsuDataCad"),
@@ -109,11 +116,46 @@ public class UsuarioDAO {
         }
     }
     
+    public void Atualizar(Usuario usuario) {
+        Connection con = null;
+        PreparedStatement stmt = null;
+        try {
+            if (usuario.getId() != 0){
+                con = ConnectionFactory.getConnection();
+                stmt = con.prepareStatement(SQL_ATUALIZAR);
+                
+                stmt.setString(1, usuario.getNome());
+                stmt.setInt(2, usuario.getCidade().getId());
+                stmt.setInt(3, usuario.getUniversidade().getId());
+                stmt.setInt(4, usuario.getCurso().getId());
+                stmt.setInt(5, usuario.getId());
+                
+                stmt.executeUpdate();
+            }
+        } catch (SQLException ex) {
+            throw new RuntimeException("Erro ao alterar um usuário no banco de dados. Origem=" + ex.getMessage());
+        } finally {
+            try {
+                stmt.close();
+            } catch (Exception ex) {
+                System.out.println("Erro ao fechar stmt. Ex=" + ex.getMessage());
+            }
+            try {
+                con.close();
+            } catch (Exception ex) {
+                System.out.println("Erro ao fechar conexão. Ex=" + ex.getMessage());
+            }
+        }
+    }
+    
+    
     private int getId(PreparedStatement stmt) throws SQLException {
         ResultSet rs = stmt.getGeneratedKeys();
         rs.next();
         
         return rs.getInt(1);
     }
+
+    
     
 }

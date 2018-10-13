@@ -39,6 +39,10 @@ public class Estado implements Serializable {
         return cidades;
     }
 
+    public void setCidades(List<Cidade> cidades){
+        this.cidades = cidades;
+    }
+
 
     public Estado(){}
 
@@ -47,6 +51,11 @@ public class Estado implements Serializable {
         this.nome = nome;
         this.uf = uf;
         this.cidades = cidades;
+    }
+
+    public String toString()
+    {
+        return this.getNome();
     }
 
 }

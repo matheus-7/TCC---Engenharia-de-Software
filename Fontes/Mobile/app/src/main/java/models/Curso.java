@@ -43,4 +43,9 @@ public class Curso implements Serializable {
         this.dataCadastro = dataCadastro;
     }
 
+    public String toString()
+    {
+        return this.getNome();
+    }
+
 }

@@ -2,6 +2,7 @@ package com.enem.prep.mobile;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -13,7 +14,7 @@ import android.os.Bundle;
 import android.view.Gravity;
 import android.view.MenuItem;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements AlterarPerfilFragment.OnFragmentInteractionListener {
 
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle toggle;
@@ -67,13 +68,16 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case R.id.perfil:
                 fragmentClass = PerfilFragment.class;
+                bundle.putString("email", prefs.getString("email", "defaultStringIfNothingFound"));
+                bundle.putBoolean("AlteracaoPermitida", true);
+
                 break;
             case R.id.estatisticas:
                 fragmentClass = EstatisticasFragment.class;
                 break;
             case R.id.conquistas:
                 fragmentClass = ConquistasFragment.class;
-                bundle.putInt("idUsuario", prefs.getInt("idUsuario", 0));
+                bundle.putString("email", prefs.getString("email", "defaultStringIfNothingFound"));
 
                 break;
             case R.id.ranking:
@@ -128,4 +132,13 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intentSair);
     }
 
+    @Override
+    public void onFragmentInteraction(Uri uri) {
+
+    }
+
+    @Override
+    public void onPointerCaptureChanged(boolean hasCapture) {
+
+    }
 }

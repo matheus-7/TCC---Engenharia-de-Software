@@ -39,4 +39,12 @@ public class UsuarioResource {
         
         return usuario;
     }
+    
+    @PUT
+    @Path("/{email}")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public void atualizar(Usuario usuario, @PathParam("email") String email) {
+        UsuarioDAO.Atualizar(usuario);
+    }
+    
 }

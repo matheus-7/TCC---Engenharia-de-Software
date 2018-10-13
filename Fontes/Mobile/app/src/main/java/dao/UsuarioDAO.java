@@ -32,7 +32,7 @@ public class UsuarioDAO {
             Gson json = new Gson();
             String data = "";
             if (usuario.getId() != 0) {
-                data = dao.doPut("/usuario/" + usuario.getId(), json.toJson(usuario));
+                data = dao.doPut("/usuario/" + usuario.getEmail(), json.toJson(usuario));
             } else {
                 data = dao.doPost("/usuario", json.toJson(usuario));
             }

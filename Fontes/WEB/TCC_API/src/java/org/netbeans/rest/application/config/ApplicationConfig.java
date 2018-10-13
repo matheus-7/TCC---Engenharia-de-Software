@@ -17,8 +17,13 @@ public class ApplicationConfig extends Application {
     private void addRestResourceClasses(Set<Class<?>> resources) {
         resources.add(api.AlternativaResource.class);
         resources.add(api.AvaliacaoResource.class);
+        resources.add(api.CidadeResource.class);
+        resources.add(api.ConquistaResource.class);
+        resources.add(api.CursoResource.class);
+        resources.add(api.EstadoResource.class);
         resources.add(api.QuestaoResource.class);
         resources.add(api.RespostaResource.class);
+        resources.add(api.UniversidadeResource.class);
         resources.add(api.UsuarioResource.class);
     }
     

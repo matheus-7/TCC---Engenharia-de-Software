@@ -3,13 +3,37 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#9FC5F8"
     tools:context=".PerfilFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Perfil"
-        android:textSize="60sp" />
+        android:orientation="vertical"
+        android:padding="5sp">
+
+        <Button
+            android:id="@+id/btnUserConquistas"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:background="@drawable/fundo_user"
+            android:textSize="70sp"
+            android:textColor="@color/colorPrimary"
+            android:stateListAnimator="@null"
+            android:layout_gravity="center_horizontal"/>
+
+        <TextView
+            android:id="@+id/tvNomeUsuario"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#000000"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:gravity="center_horizontal"
+            android:layout_marginLeft="6dp" />
+
+    </LinearLayout>
+
 
 </FrameLayout>

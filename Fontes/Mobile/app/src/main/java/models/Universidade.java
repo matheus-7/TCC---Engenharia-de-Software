@@ -41,6 +41,10 @@ public class Universidade implements Serializable {
         return cursos;
     }
 
+    public void setCursos(List<Curso> cursos){
+        this.cursos = cursos;
+    }
+
     public Date getDataCadastro(){
         return dataCadastro;
     }
@@ -58,6 +62,11 @@ public class Universidade implements Serializable {
         this.cidade = cidade;
         this.cursos = cursos;
         this.dataCadastro = dataCadastro;
+    }
+
+    public String toString()
+    {
+        return this.getNome();
     }
 
 }

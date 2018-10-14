@@ -10,6 +10,8 @@ public interface UsuarioDao {
     
     public Usuario Selecionar(int id);
     
+    public Usuario Selecionar(String email, String senha);
+    
     public boolean Existe(Usuario usuario, int idAnterior);
     
     public void Atualizar(Usuario usuario);

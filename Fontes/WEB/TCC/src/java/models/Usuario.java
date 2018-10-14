@@ -21,6 +21,7 @@ public class Usuario {
     private List<Resposta> respostas;
     private Date dataCadastro;
     private Boolean audioAtivo;
+    private int posicaoRanking;
     
     
     public int getId(){
@@ -140,6 +141,14 @@ public class Usuario {
         else return 0;
     }
     
+    public int getPosicaoRanking(){
+        return posicaoRanking;
+    }
+    
+    public void setPosicaoRanking(int posicaoRanking){
+        this.posicaoRanking = posicaoRanking;
+    }
+    
     public String getSenhaCriptografada(String password){
         int contador, tamanho,codigoASCII;
         
@@ -181,7 +190,7 @@ public class Usuario {
     
     public Usuario(int id, String nome, String email, String senha, String direito, Boolean ativo, String foto, 
                    Cidade cidade, Date dataNascimento, Universidade universidade, Curso curso, List<Conquista> conquistas,
-                   List<Resposta> respostas, Date dataCadastro, Boolean audioAtivo){
+                   List<Resposta> respostas, Date dataCadastro, Boolean audioAtivo, int posicaoRanking){
         this.id = id;
         this.nome = nome;
         this.email = email;
@@ -197,6 +206,7 @@ public class Usuario {
         this.respostas = respostas;
         this.dataCadastro = dataCadastro;
         this.audioAtivo = audioAtivo;
+        this.posicaoRanking = posicaoRanking;
     }
     
 }

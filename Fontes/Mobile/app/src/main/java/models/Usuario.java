@@ -21,6 +21,7 @@ public class Usuario implements Serializable {
     private List<Resposta> respostas;
     private Date dataCadastro;
     private Boolean audioAtivo;
+    private int posicaoRanking;
 
 
     public int getId(){
@@ -139,6 +140,14 @@ public class Usuario implements Serializable {
         this.audioAtivo = audioAtivo;
     }
 
+    public int getPosicaoRanking(){
+        return posicaoRanking;
+    }
+
+    public void setPosicaoRanking(int posicaoRanking){
+        this.posicaoRanking = posicaoRanking;
+    }
+
     public int getCodigoAtivo(){
         if (this.getAtivo()) return 1;
         else return 0;
@@ -191,7 +200,7 @@ public class Usuario implements Serializable {
 
     public Usuario(int id, String nome, String email, String senha, String direito, Boolean ativo, String foto,
                    Cidade cidade, Date dataNascimento, Universidade universidade, Curso curso, List<Conquista> conquistas,
-                   List<Resposta> respostas, Date dataCadastro, Boolean audioAtivo){
+                   List<Resposta> respostas, Date dataCadastro, Boolean audioAtivo, int posicaoRanking){
         this.id = id;
         this.nome = nome;
         this.email = email;
@@ -207,6 +216,7 @@ public class Usuario implements Serializable {
         this.respostas = respostas;
         this.dataCadastro = dataCadastro;
         this.audioAtivo = audioAtivo;
+        this.posicaoRanking = posicaoRanking;
     }
 
 }

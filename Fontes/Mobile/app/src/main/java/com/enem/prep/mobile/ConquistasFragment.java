@@ -155,12 +155,13 @@ public class ConquistasFragment extends Fragment {
                         List<Conquista> conquistas = gson.fromJson(JSONArray.toString(), type);
 
                         usuario.setConquistas(conquistas);
+
+                        ArrayAdapter<Conquista> adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, conquistas);
+                        lvListaConquistas.setAdapter(adapter);
                     }
                 } catch (Exception E) {
                     return null;
                 }
-
-
             }
             catch (Exception e){
                 return "Não foi realizar esta ação. Tente novamente mais tarde!";
@@ -171,10 +172,6 @@ public class ConquistasFragment extends Fragment {
 
         @Override
         protected void onPostExecute(String result) {
-            ArrayAdapter<Conquista> adapter = new ArrayAdapter<>(context, android.R.layout.simple_list_item_1, usuario.getConquistas());
-
-            lvListaConquistas.setAdapter(adapter);
-
             dialog.dismiss();
         }
 

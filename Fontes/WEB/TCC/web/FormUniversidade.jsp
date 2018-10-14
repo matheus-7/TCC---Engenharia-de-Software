@@ -64,11 +64,8 @@
                             Relatórios
                         </a>
                         <div class="navbar-dropdown is-boxed">
-                            <a class="navbar-item" href="AvaliacoesServlet">
+                            <a class="navbar-item" href="AvaliacaoServlet">
                                 Avaliações
-                            </a>
-                            <a class="navbar-item" href="RelatorioServlet">
-                                Geral
                             </a>
                         </div>
                     </div>
@@ -131,6 +128,36 @@
                                                 </select>
                                             </div>    
                                         </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 100%">
+                                        <label class="label">Cursos:</label>   
+                                        <table class="table is-fullwidth" id="tbCursos">
+                                            <thead>
+                                                <tr id="header"> 
+                                                    <th style="width: 90%">
+                                                        
+                                                    </th>
+                                                    <th/>
+                                                </tr>
+                                            </thead>
+
+                                            <tbody>
+
+                                                <c:forEach var="curso" items="${cursos}" varStatus="inf">
+                                                    <tr>
+                                                        <td>
+                                                            ${curso.getNome()}
+                                                        </td>
+                                                        <td>
+                                                            <input type="checkbox" name="cbCurso" value="${curso.getId()}" <c:if test="${universidade.getCursos().indexOf(curso) != -1}">checked</c:if>>
+                                                        </td>
+                                                    </tr>
+                                                </c:forEach>
+
+                                            </tbody>
+                                        </table>
                                     </td>
                                 </tr>
                             </tbody>

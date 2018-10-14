@@ -41,7 +41,7 @@
         android:id="@+id/btnEntrar"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="0.10"
+        android:layout_weight="0.15"
         android:background="#003762"
         android:text="Entrar"
         android:textColor="#EEEDED"
@@ -52,20 +52,9 @@
         android:id="@+id/btnNovaConta"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="0.10"
+        android:layout_weight="0.15"
         android:background="#085394"
         android:text="Nova Conta"
-        android:textColor="#EEEDED"
-        android:textSize="20sp"
-        android:textStyle="bold"/>
-
-    <Button
-        android:id="@+id/btnRecuperarSenha"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="0.10"
-        android:background="#597EAA"
-        android:text="Esqueci minha senha"
         android:textColor="#EEEDED"
         android:textSize="20sp"
         android:textStyle="bold"/>

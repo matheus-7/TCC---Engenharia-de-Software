@@ -147,7 +147,7 @@ public class LoginActivity extends AppCompatActivity {
 
         Button btnEntrar = (Button) findViewById(R.id.btnEntrar);
         Button btnNovaConta = (Button) findViewById(R.id.btnNovaConta);
-        Button btnRecuperarSenha = (Button) findViewById(R.id.btnRecuperarSenha);
+
 
         btnEntrar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -161,14 +161,6 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intentNovaConta = new Intent(LoginActivity.this, NovaContaActivity.class);
                 startActivity(intentNovaConta);
-            }
-        });
-
-        btnRecuperarSenha.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intentRecuperarSenha = new Intent(LoginActivity.this, RecuperarSenhaActivity.class);
-                startActivity(intentRecuperarSenha);
             }
         });
     }

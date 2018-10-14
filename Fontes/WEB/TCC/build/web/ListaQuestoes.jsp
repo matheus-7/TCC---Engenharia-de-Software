@@ -64,11 +64,8 @@
                             Relatórios
                         </a>
                         <div class="navbar-dropdown is-boxed">
-                            <a class="navbar-item" href="AvaliacoesServlet">
+                            <a class="navbar-item" href="AvaliacaoServlet">
                                 Avaliações
-                            </a>
-                            <a class="navbar-item" href="RelatorioServlet">
-                                Geral
                             </a>
                         </div>
                     </div>
@@ -109,7 +106,7 @@
                 
                 <label class="label help is-danger">${erro}</label>
                 
-                <table class="table is-fullwidth" id="tbUniversidades">
+                <table class="table is-fullwidth" id="tbQuestoes">
                     <thead>
                         <tr id="header"> 
                             <th style="width: 10%">

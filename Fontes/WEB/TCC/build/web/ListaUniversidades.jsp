@@ -64,11 +64,8 @@
                             Relatórios
                         </a>
                         <div class="navbar-dropdown is-boxed">
-                            <a class="navbar-item" href="AvaliacoesServlet">
+                            <a class="navbar-item" href="AvaliacaoServlet">
                                 Avaliações
-                            </a>
-                            <a class="navbar-item" href="RelatorioServlet">
-                                Geral
                             </a>
                         </div>
                     </div>

@@ -12,6 +12,7 @@ import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewTreeObserver;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
@@ -166,12 +167,9 @@ public class RespostasActivity extends AppCompatActivity {
                                     },
                                     2000);
                         }
-
-                        svRespostas.fullScroll(ScrollView.FOCUS_UP);
                     }
                 },
-         2000);
-
+         3000);
     }
 
     private void exibirPontuacaoFinal() {
@@ -275,6 +273,8 @@ public class RespostasActivity extends AppCompatActivity {
         btnAlternativa5.setBackgroundResource(R.drawable.btn_alternativa);
 
         liberarBotoes(true);
+
+        svRespostas.fullScroll(ScrollView.FOCUS_UP);
     }
 
     private void startActivity(String area) {

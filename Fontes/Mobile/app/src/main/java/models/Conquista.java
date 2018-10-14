@@ -53,4 +53,9 @@ public class Conquista implements Serializable {
         this.data = data;
     }
 
+
+    @Override
+    public String toString() {
+        return this.getConquistaConfig().getTitulo();
+    }
 }

@@ -29,8 +29,16 @@ public class QuestaoServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
          
-            Questao questao = new Questao();
             HttpSession session = request.getSession(true);
+            String acesso = (String)session.getAttribute("acesso");
+            
+            if (acesso == null || !acesso.equals("Permitido")){
+                request.getRequestDispatcher("/index.jsp").forward(request, response);
+                return;
+            }
+            
+            
+            Questao questao = new Questao();
             String acao = request.getParameter("acao");
             
             if (acao == null) redirectQuestoes(request, response); 

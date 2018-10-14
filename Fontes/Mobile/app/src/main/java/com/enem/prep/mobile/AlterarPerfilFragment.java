@@ -133,12 +133,15 @@ public class AlterarPerfilFragment extends Fragment implements AdapterView.OnIte
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 if (cont == 0){
-                    if (usuario.getCidade().getEstado().getId() != 0){
+                    try {
                         for (int c = 0; c < spEstado.getCount(); c++){
                             if (spEstado.getItemAtPosition(c).toString().equals(usuario.getCidade().getEstado().toString())){
                                 spEstado.setSelection(c);
                             }
                         }
+                    }
+                    catch(Exception ex){
+
                     }
                 }
 
@@ -159,12 +162,15 @@ public class AlterarPerfilFragment extends Fragment implements AdapterView.OnIte
                 Universidade universidade = (Universidade)spUniversidade.getSelectedItem();
 
                 if (cont == 0){
-                    if (usuario.getUniversidade().getId() != 0){
+                    try {
                         for (int c = 0; c < spUniversidade.getCount(); c++){
                             if (spUniversidade.getItemAtPosition(c).toString().equals(usuario.getUniversidade().toString())){
                                 spUniversidade.setSelection(c);
                             }
                         }
+                    }
+                    catch(Exception ex){
+
                     }
                 }
 
@@ -181,12 +187,15 @@ public class AlterarPerfilFragment extends Fragment implements AdapterView.OnIte
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 if (cont == 0){
-                    if (usuario.getCidade().getId() != 0){
+                    try {
                         for (int c = 0; c < spCidade.getCount(); c++){
                             if (spCidade.getItemAtPosition(c).toString().equals(usuario.getCidade().toString())){
                                 spCidade.setSelection(c);
                             }
                         }
+                    }
+                    catch(Exception ex){
+
                     }
                 }
             }
@@ -201,12 +210,15 @@ public class AlterarPerfilFragment extends Fragment implements AdapterView.OnIte
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 if (cont == 0){
-                    if (usuario.getCurso().getId() != 0){
+                    try {
                         for (int c = 0; c < spCurso.getCount(); c++){
                             if (spCurso.getItemAtPosition(c).toString().equals(usuario.getCurso().toString())){
                                 spCurso.setSelection(c);
                             }
                         }
+                    }
+                    catch(Exception ex){
+
                     }
 
                     cont++;

@@ -12,6 +12,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import models.Curso;
 
 @WebServlet(name = "CursoServlet", urlPatterns = {"/CursoServlet"})
@@ -23,6 +24,14 @@ public class CursoServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
+            HttpSession session = request.getSession(true);
+            String acesso = (String)session.getAttribute("acesso");
+            
+            if (acesso == null || !acesso.equals("Permitido")){
+                request.getRequestDispatcher("/index.jsp").forward(request, response);
+                return;
+            }
+            
             
             Curso curso = new Curso();
             

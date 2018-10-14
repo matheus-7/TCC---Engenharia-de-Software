@@ -15,8 +15,7 @@
         <RatingBar
             android:id="@+id/rbNota"
             android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:layout_weight="0.10"
+            android:layout_height="wrap_content"
             android:numStars="5"
             android:rating="10"
             android:layout_gravity="center"
@@ -25,8 +24,7 @@
         <EditText
             android:id="@+id/edtComentario"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="0.40"
+            android:layout_height="170dp"
             android:hint="Deixe uma mensagem"
             android:inputType="textMultiLine"
             android:background="@color/white"
@@ -37,19 +35,12 @@
         <Button
             android:id="@+id/btnEnviar"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="0.10"
+            android:layout_height="wrap_content"
             android:background="#003762"
             android:text="Enviar"
             android:textColor="#EEEDED"
             android:textSize="20sp"
             android:textStyle="bold"/>
-
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="0.40"
-            android:visibility="invisible"/>
 
     </LinearLayout>
 

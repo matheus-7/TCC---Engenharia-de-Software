@@ -26,8 +26,15 @@ public class UsuarioServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             
-            Usuario usuario = new Usuario();
             HttpSession session = request.getSession(true);
+            String acesso = (String)session.getAttribute("acesso");
+            
+            if (acesso == null || !acesso.equals("Permitido")){
+                request.getRequestDispatcher("/index.jsp").forward(request, response);
+                return;
+            }
+            
+            Usuario usuario = new Usuario();
             String acao = request.getParameter("acao");
             
             if (acao == null) redirectUsuarios(request, response);
@@ -78,7 +85,8 @@ public class UsuarioServlet extends HttpServlet {
                         null, 
                         null,
                         new Date(System.currentTimeMillis()), 
-                        null
+                        null,
+                        0
                 );
                 
                 try {

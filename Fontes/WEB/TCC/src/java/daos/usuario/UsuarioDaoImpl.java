@@ -37,6 +37,71 @@ public class UsuarioDaoImpl implements UsuarioDao {
     
     private final String stmtInserir = "insert into usuario (UsuNome, UsuEmail, UsuSenha, UsuDireito, UsuAtivo, UsuDataCad) values (?, ?, ?, ?, ?, ?)";
     
+    private final String stmtLogin = "select UsuId, CurId, UniId, CidId, UsuNome, UsuEmail, UsuSenha, UsuDireito, UsuAtivo, " +
+                                      "       UsuDataNasc, UsuDataCad, UsuAudio " +
+                                      "from usuario " +
+                                      "where UsuEmail = ? " + 
+                                      "   and UsuSenha = ? " +
+                                      "order by UsuNome";
+    
+    @Override
+    public Usuario Selecionar(String email, String senha) {
+        Connection con = null;
+        PreparedStatement stmt = null;
+        ResultSet result = null;
+        try {
+            con = ConnectionFactory.getConnection();
+            stmt = con.prepareStatement(stmtLogin);
+            stmt.setString(1, email);
+            stmt.setString(2, new Usuario().getSenhaCriptografada(senha));
+            result = stmt.executeQuery();
+            Usuario usuario = new Usuario();
+            if (result.next()) {
+                Boolean ativo = result.getInt("UsuAtivo") == 1;
+                Boolean audioAtivo = result.getInt("UsuAudio") == 1;
+                
+                usuario = new Usuario(
+                        result.getInt("UsuId"), 
+                        result.getString("UsuNome"),
+                        result.getString("UsuEmail"),
+                        result.getString("UsuSenha"),
+                        result.getString("UsuDireito"),
+                        ativo,
+                        null,
+                        null,
+                        result.getDate("UsuDataNasc"),
+                        null,
+                        null,
+                        null,
+                        null,
+                        result.getDate("UsuDataCad"),
+                        audioAtivo,
+                        0
+                );       
+            }
+            
+            return usuario;
+        } catch (SQLException ex) {
+            throw new RuntimeException("Erro ao selecionar um usuário. Origem=" + ex.getMessage());
+        } finally {
+            try {
+                result.close();
+            } catch (Exception ex) {
+                System.out.println("Erro ao fechar result set. Ex=" + ex.getMessage());
+            }
+            try {
+                stmt.close();
+            } catch (Exception ex) {
+                System.out.println("Erro ao fechar stmt. Ex=" + ex.getMessage());
+            }
+            try {
+                con.close();
+            } catch (Exception ex) {
+                System.out.println("Erro ao fechar conexão. Ex=" + ex.getMessage());
+            }
+        }
+    }
+    
     @Override
     public List<Usuario> Listar() {
         Connection con = null;
@@ -69,7 +134,8 @@ public class UsuarioDaoImpl implements UsuarioDao {
                         null,
                         null,
                         result.getDate("UsuDataCad"),
-                        audioAtivo
+                        audioAtivo,
+                        0
                 );
                 
                 lista.add(usuario);
@@ -116,7 +182,7 @@ public class UsuarioDaoImpl implements UsuarioDao {
                         result.getInt("UsuId"), 
                         result.getString("UsuNome"),
                         result.getString("UsuEmail"),
-                        result.getString("UsuSenha"),
+                        new Usuario().getSenhaDescriptografada(result.getString("UsuSenha")),
                         result.getString("UsuDireito"),
                         ativo,
                         null,
@@ -127,7 +193,8 @@ public class UsuarioDaoImpl implements UsuarioDao {
                         null,
                         null,
                         result.getDate("UsuDataCad"),
-                        audioAtivo
+                        audioAtivo,
+                        0
                 );
             }
             

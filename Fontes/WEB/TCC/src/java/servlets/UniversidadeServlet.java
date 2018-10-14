@@ -3,6 +3,8 @@ package servlets;
 
 import daos.cidade.CidadeDao;
 import daos.cidade.CidadeDaoImpl;
+import daos.curso.CursoDao;
+import daos.curso.CursoDaoImpl;
 import daos.estado.EstadoDao;
 import daos.estado.EstadoDaoImpl;
 import daos.universidade.UniversidadeDao;
@@ -18,6 +20,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import models.Cidade;
+import models.Curso;
 import models.Estado;
 import models.Universidade;
 
@@ -25,6 +28,7 @@ import models.Universidade;
 public class UniversidadeServlet extends HttpServlet {
 
     UniversidadeDao UniversidadeDao = new UniversidadeDaoImpl();
+    CursoDao CursoDao = new CursoDaoImpl();
     CidadeDao CidadeDao = new CidadeDaoImpl();
     EstadoDao estadoDao = new EstadoDaoImpl();
     
@@ -33,14 +37,21 @@ public class UniversidadeServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             
-            Universidade universidade = new Universidade();
             HttpSession session = request.getSession(true);
+            String acesso = (String)session.getAttribute("acesso");
+            
+            if (acesso == null || !acesso.equals("Permitido")){
+                request.getRequestDispatcher("/index.jsp").forward(request, response);
+                return;
+            }
+            
+            Universidade universidade = new Universidade();
             String acao = request.getParameter("acao");
 
             if (acao == null) redirectUniversidades(request, response);
             else if (acao.equals("novo")){
                 session.setAttribute("universidadeAnterior", new Universidade());
-                
+                                
                 redirectUniversidadeCadastro(request, response, universidade);
             }
             else if (acao.equals("listarCidades")){
@@ -129,7 +140,9 @@ public class UniversidadeServlet extends HttpServlet {
     private void redirectUniversidadeCadastro(HttpServletRequest request, HttpServletResponse response, Universidade universidade)
             throws ServletException, IOException {
         List<Estado> estados = estadoDao.Listar();
-                
+        List<Curso> cursos = CursoDao.Listar();
+        
+        request.setAttribute("cursos", cursos);        
         request.setAttribute("estados", estados);
         request.setAttribute("universidade", universidade);
         

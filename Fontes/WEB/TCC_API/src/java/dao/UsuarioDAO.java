@@ -6,6 +6,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
 import model.Usuario;
 
 
@@ -24,7 +26,12 @@ public class UsuarioDAO {
                                    "                   CidId = ?, " +
                                    "                   UniId = ?, " +
                                    "                   CurId = ? " +
-                                   "where UsuId = ? " ;    
+                                   "where UsuId = ? " ;  
+    
+    private String SQL_LISTAR_RANKING = "select UsuId " +
+                                        "from resposta " +
+                                        "group by UsuId " +
+                                        "order by SUM(ResPontos) desc";
     
     public Usuario Selecionar(String email) {
         Connection con = null;
@@ -55,8 +62,9 @@ public class UsuarioDAO {
                         null,
                         null,
                         result.getDate("UsuDataCad"),
-                        audioAtivo
-                );              
+                        audioAtivo,
+                        this.SelecionarPosicaoRanking(result.getInt("UsuId"))
+                );       
             }
             
             return usuario;
@@ -92,7 +100,7 @@ public class UsuarioDAO {
                 stmt.setString(1, usuario.getNome());
                 stmt.setString(2, usuario.getEmail());
                 stmt.setString(3, usuario.getSenhaCriptografada(usuario.getSenha()));
-                stmt.setString(4, "Usuário");
+                stmt.setString(4, "Estudante");
                 stmt.setInt(5, 1);
                 stmt.setTimestamp(6, new java.sql.Timestamp(System.currentTimeMillis()));
                 
@@ -135,6 +143,53 @@ public class UsuarioDAO {
         } catch (SQLException ex) {
             throw new RuntimeException("Erro ao alterar um usuário no banco de dados. Origem=" + ex.getMessage());
         } finally {
+            try {
+                stmt.close();
+            } catch (Exception ex) {
+                System.out.println("Erro ao fechar stmt. Ex=" + ex.getMessage());
+            }
+            try {
+                con.close();
+            } catch (Exception ex) {
+                System.out.println("Erro ao fechar conexão. Ex=" + ex.getMessage());
+            }
+        }
+    }
+    
+    public int SelecionarPosicaoRanking(int idUsuario) {
+        Connection con = null;
+        PreparedStatement stmt = null;
+        ResultSet result = null;
+        int posicao = 1;
+        List<Usuario> lista = new ArrayList();
+        
+        try {
+            con = ConnectionFactory.getConnection();
+            stmt = con.prepareStatement(SQL_LISTAR_RANKING);
+            result = stmt.executeQuery();
+            while (result.next()) {
+                
+                Usuario usuario = new Usuario();
+                
+                usuario.setId(result.getInt("UsuId"));
+                
+                lista.add(usuario);
+            }
+            
+            for (Usuario usu : lista){
+                if (usu.getId() == idUsuario) break;
+                else posicao++;
+            }
+            
+            return posicao;
+        } catch (SQLException ex) {
+            throw new RuntimeException("Erro ao consultar uma lista de usuários. Origem=" + ex.getMessage());
+        } finally {
+            try {
+                result.close();
+            } catch (Exception ex) {
+                System.out.println("Erro ao fechar result set. Ex=" + ex.getMessage());
+            }
             try {
                 stmt.close();
             } catch (Exception ex) {

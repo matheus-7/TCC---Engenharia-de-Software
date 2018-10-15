@@ -17,12 +17,12 @@ import models.Usuario;
 public class UsuarioDaoImpl implements UsuarioDao {
 
     private final String stmtListar = "select UsuId, CurId, UniId, CidId, UsuNome, UsuEmail, UsuSenha, UsuDireito, UsuAtivo, " +
-                                      "       UsuDataNasc, UsuDataCad, UsuAudio " + 
+                                      "       UsuDataCad " + 
                                       "from usuario " +
                                       "order by UsuNome";
     
     private final String stmtSelecionar = "select UsuId, CurId, UniId, CidId, UsuNome, UsuEmail, UsuSenha, UsuDireito, " +
-                                          "       UsuAtivo, UsuDataNasc, UsuDataCad, UsuAudio " +
+                                          "       UsuAtivo, UsuDataCad " +
                                           "from usuario " +
                                           "where UsuId = ?";
     
@@ -38,7 +38,7 @@ public class UsuarioDaoImpl implements UsuarioDao {
     private final String stmtInserir = "insert into usuario (UsuNome, UsuEmail, UsuSenha, UsuDireito, UsuAtivo, UsuDataCad) values (?, ?, ?, ?, ?, ?)";
     
     private final String stmtLogin = "select UsuId, CurId, UniId, CidId, UsuNome, UsuEmail, UsuSenha, UsuDireito, UsuAtivo, " +
-                                      "       UsuDataNasc, UsuDataCad, UsuAudio " +
+                                      "      UsuDataCad " +
                                       "from usuario " +
                                       "where UsuEmail = ? " + 
                                       "   and UsuSenha = ? " +
@@ -58,7 +58,6 @@ public class UsuarioDaoImpl implements UsuarioDao {
             Usuario usuario = new Usuario();
             if (result.next()) {
                 Boolean ativo = result.getInt("UsuAtivo") == 1;
-                Boolean audioAtivo = result.getInt("UsuAudio") == 1;
                 
                 usuario = new Usuario(
                         result.getInt("UsuId"), 
@@ -69,13 +68,10 @@ public class UsuarioDaoImpl implements UsuarioDao {
                         ativo,
                         null,
                         null,
-                        result.getDate("UsuDataNasc"),
-                        null,
                         null,
                         null,
                         null,
                         result.getDate("UsuDataCad"),
-                        audioAtivo,
                         0
                 );       
             }
@@ -117,7 +113,6 @@ public class UsuarioDaoImpl implements UsuarioDao {
             while (result.next()) {
                 
                 Boolean ativo = result.getInt("UsuAtivo") == 1;
-                Boolean audioAtivo = result.getInt("UsuAudio") == 1;
                 
                 Usuario usuario = new Usuario(
                         result.getInt("UsuId"), 
@@ -126,15 +121,12 @@ public class UsuarioDaoImpl implements UsuarioDao {
                         result.getString("UsuSenha"),
                         result.getString("UsuDireito"),
                         ativo,
-                        null,
                         new CidadeDaoImpl().Selecionar(result.getInt("CidId")),
-                        result.getDate("UsuDataNasc"),
                         new UniversidadeDaoImpl().Selecionar(result.getInt("UniId")),
                         new CursoDaoImpl().Selecionar(result.getInt("CurId")),
                         null,
                         null,
                         result.getDate("UsuDataCad"),
-                        audioAtivo,
                         0
                 );
                 
@@ -176,7 +168,6 @@ public class UsuarioDaoImpl implements UsuarioDao {
             while (result.next()) {
                 
                 Boolean ativo = result.getInt("UsuAtivo") == 1;
-                Boolean audioAtivo = result.getInt("UsuAudio") == 1;
                 
                 usuario = new Usuario(
                         result.getInt("UsuId"), 
@@ -185,15 +176,12 @@ public class UsuarioDaoImpl implements UsuarioDao {
                         new Usuario().getSenhaDescriptografada(result.getString("UsuSenha")),
                         result.getString("UsuDireito"),
                         ativo,
-                        null,
                         new CidadeDaoImpl().Selecionar(result.getInt("CidId")),
-                        result.getDate("UsuDataNasc"),
                         new UniversidadeDaoImpl().Selecionar(result.getInt("UniId")),
                         new CursoDaoImpl().Selecionar(result.getInt("CurId")),
                         null,
                         null,
                         result.getDate("UsuDataCad"),
-                        audioAtivo,
                         0
                 );
             }

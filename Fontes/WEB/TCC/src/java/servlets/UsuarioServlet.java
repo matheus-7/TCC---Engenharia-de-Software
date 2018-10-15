@@ -81,11 +81,8 @@ public class UsuarioServlet extends HttpServlet {
                         null, 
                         null, 
                         null, 
-                        null, 
-                        null, 
                         null,
-                        new Date(System.currentTimeMillis()), 
-                        null,
+                        new Date(System.currentTimeMillis()),
                         0
                 );
                 

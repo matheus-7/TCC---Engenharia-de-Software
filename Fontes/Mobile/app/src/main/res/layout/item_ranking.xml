@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout
-xmlns:android="http://schemas.android.com/apk/res/android"
-android:background="@android:color/transparent"
-android:padding="15dp"
-android:layout_width="match_parent"
-android:layout_height="wrap_content">
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@android:color/transparent"
+    android:padding="15dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
 
     <LinearLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
@@ -12,10 +12,14 @@ android:layout_height="wrap_content">
         android:layout_height="match_parent"
         android:orientation="horizontal">
 
-    <ImageView
-        android:layout_width="64dp"
-        android:layout_height="64dp"
-        android:src="@drawable/ic_star_50dp" />
+        <Button
+            android:id="@+id/btnUser"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:background="@drawable/fundo_user"
+            android:textSize="35sp"
+            android:textColor="@color/colorPrimary"
+            android:stateListAnimator="@null" />
 
         <LinearLayout
             xmlns:android="http://schemas.android.com/apk/res/android"
@@ -24,18 +28,26 @@ android:layout_height="wrap_content">
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/tvNome"
+                android:id="@+id/tvPosicao"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="20sp"
+                android:textSize="18sp"
                 android:textStyle="bold"
                 android:paddingLeft="10dp"/>
 
             <TextView
-                android:id="@+id/tvDescricao"
+                android:id="@+id/tvNome"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="14sp"
+                android:textStyle="bold"
+                android:textSize="18sp"
+                android:paddingLeft="10dp"/>
+
+            <TextView
+                android:id="@+id/tvPontuacao"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
                 android:paddingLeft="10dp"/>
 
         </LinearLayout>

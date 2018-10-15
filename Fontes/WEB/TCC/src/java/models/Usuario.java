@@ -12,15 +12,12 @@ public class Usuario {
     private String senha;
     private String direito;
     private Boolean ativo;
-    private String foto;
     private Cidade cidade;
-    private Date dataNascimento;
     private Universidade universidade;
     private Curso curso;
     private List<Conquista> conquistas;
     private List<Resposta> respostas;
     private Date dataCadastro;
-    private Boolean audioAtivo;
     private int posicaoRanking;
     
     
@@ -71,29 +68,13 @@ public class Usuario {
     public void setAtivo(Boolean ativo){
         this.ativo = ativo;
     }
-    
-    public String getFoto(){
-        return foto;
-    }
-    
-    public void setFoto(String foto){
-        this.foto = foto;
-    }
-    
+
     public Cidade getCidade(){
         return cidade;
     }
     
     public void setCidade(Cidade cidade){
         this.cidade = cidade;
-    }
-    
-    public Date getDataNascimento(){
-        return dataNascimento;
-    }
-    
-    public void setDataNascimento(Date dataNascimento){
-        this.dataNascimento = dataNascimento;
     }
     
     public Universidade getUniversidade(){
@@ -126,14 +107,6 @@ public class Usuario {
     
     public void setDataCadastro(Date dataCadastro){
         this.dataCadastro = dataCadastro;
-    }
-    
-    public Boolean getAudioAtivo(){
-        return audioAtivo;
-    }
-    
-    public void setAudioAtivo(Boolean audioAtivo){
-        this.audioAtivo = audioAtivo;
     }
     
     public int getCodigoAtivo(){
@@ -188,24 +161,21 @@ public class Usuario {
     
     public Usuario(){}
     
-    public Usuario(int id, String nome, String email, String senha, String direito, Boolean ativo, String foto, 
-                   Cidade cidade, Date dataNascimento, Universidade universidade, Curso curso, List<Conquista> conquistas,
-                   List<Resposta> respostas, Date dataCadastro, Boolean audioAtivo, int posicaoRanking){
+    public Usuario(int id, String nome, String email, String senha, String direito, Boolean ativo,
+                   Cidade cidade, Universidade universidade, Curso curso, List<Conquista> conquistas,
+                   List<Resposta> respostas, Date dataCadastro, int posicaoRanking){
         this.id = id;
         this.nome = nome;
         this.email = email;
         this.senha = senha;
         this.direito = direito;
         this.ativo = ativo;
-        this.foto = foto;
         this.cidade = cidade;
-        this.dataNascimento = dataNascimento;
         this.universidade = universidade;
         this.curso = curso;
         this.conquistas = conquistas;
         this.respostas = respostas;
         this.dataCadastro = dataCadastro;
-        this.audioAtivo = audioAtivo;
         this.posicaoRanking = posicaoRanking;
     }
     

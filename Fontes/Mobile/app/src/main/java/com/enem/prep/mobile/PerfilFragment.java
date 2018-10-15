@@ -42,6 +42,7 @@ public class PerfilFragment extends Fragment {
     private String mParam2;
 
     private Button btnUserConquistas = null;
+    private Button btnConquistas = null;
 
     private TextView tvNomeUsuario = null;
     private TextView tvUniversidade = null;
@@ -94,6 +95,7 @@ public class PerfilFragment extends Fragment {
         Boolean alteracaoPermitida = getArguments().getBoolean("AlteracaoPermitida", false);
 
         btnUserConquistas = (Button) view.findViewById(R.id.btnUserConquistas);
+        btnConquistas = (Button) view.findViewById(R.id.btnConquistas);
 
         tvNomeUsuario = (TextView) view.findViewById(R.id.tvNomeUsuario);
         tvUniversidade = (TextView) view.findViewById(R.id.tvUniversidade);
@@ -115,6 +117,31 @@ public class PerfilFragment extends Fragment {
                 }
             });
         }
+
+        btnConquistas.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Fragment fragment = null;
+                Class fragmentClass = null;
+                Bundle bundle = new Bundle();
+                fragmentClass = ConquistasFragment .class;
+
+                bundle.putString("email", usuario.getEmail());
+
+                try{
+                    fragment = (Fragment) fragmentClass.newInstance();
+
+                    fragment.setArguments(bundle);
+                }
+                catch (Exception e){
+                    e.printStackTrace();
+                }
+
+                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                fragmentManager.beginTransaction().replace(R.id.content, fragment).commit();
+                getActivity().setTitle("Conquistas");
+            }
+        });
 
         new SelecionarTask(emailUsuario, this.getActivity().getApplicationContext()).execute();
 

@@ -8,6 +8,7 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,11 +24,14 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.List;
 
+import adapter.ConquistasAdapter;
 import dao.ConquistaDAO;
 import dao.UsuarioDAO;
 import models.Conquista;
+import models.ConquistaConfig;
 import models.Questao;
 import models.Usuario;
 
@@ -77,7 +81,7 @@ public class ConquistasFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        final View view = inflater.inflate(R.layout.fragment_conquistas, container, false);
+        View view = inflater.inflate(R.layout.fragment_conquistas, container, false);
 
         String emailUsuario = getArguments().getString("email", "defaultStringIfNothingFound");
 
@@ -85,7 +89,49 @@ public class ConquistasFragment extends Fragment {
         tvNomeUsuario = (TextView) view.findViewById(R.id.tvNomeUsuario);
         lvListaConquistas = (ListView) view.findViewById(R.id.lvListaConquistas);
 
-        new SelecionarTask(emailUsuario, this.getActivity().getApplicationContext()).execute();
+        ConquistaConfig conf = new ConquistaConfig();
+        conf.setTitulo("Teste");
+
+        ConquistaConfig conf2 = new ConquistaConfig();
+        conf.setTitulo("Teste2");
+
+        Conquista conq = new Conquista();
+        conq.setConquistaConfig(conf);
+
+        Conquista conq2 = new Conquista();
+        conq2.setConquistaConfig(conf2);
+
+        List<Conquista> conqs = new ArrayList<Conquista>();
+        conqs.add(conq);
+        conqs.add(conq2);
+
+        btnUserConquistas.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Fragment fragment = null;
+                Class fragmentClass = null;
+                Bundle bundle = new Bundle();
+                fragmentClass = PerfilFragment.class;
+
+                bundle.putString("email", usuario.getEmail());
+                bundle.putBoolean("AlteracaoPermitida", true);
+
+                try{
+                    fragment = (Fragment) fragmentClass.newInstance();
+
+                    fragment.setArguments(bundle);
+                }
+                catch (Exception e){
+                    e.printStackTrace();
+                }
+
+                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                fragmentManager.beginTransaction().replace(R.id.content, fragment).commit();
+                getActivity().setTitle("Perfil");
+            }
+        });
+
+        new SelecionarTask(emailUsuario, this.getActivity()).execute();
 
         return view;
     }
@@ -137,6 +183,7 @@ public class ConquistasFragment extends Fragment {
 
                 usuario.setId(obj.getInt("id"));
                 usuario.setNome(obj.getString("nome"));
+                usuario.setEmail(email);
 
                 btnUserConquistas.setText(usuario.getNome().substring(0, 1));
                 tvNomeUsuario.setText(usuario.getNome());
@@ -155,9 +202,6 @@ public class ConquistasFragment extends Fragment {
                         List<Conquista> conquistas = gson.fromJson(JSONArray.toString(), type);
 
                         usuario.setConquistas(conquistas);
-
-                        ArrayAdapter<Conquista> adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, conquistas);
-                        lvListaConquistas.setAdapter(adapter);
                     }
                 } catch (Exception E) {
                     return null;
@@ -172,6 +216,9 @@ public class ConquistasFragment extends Fragment {
 
         @Override
         protected void onPostExecute(String result) {
+            ConquistasAdapter adapter = new ConquistasAdapter(context, usuario.getConquistas());
+            lvListaConquistas.setAdapter(adapter);
+
             dialog.dismiss();
         }
 

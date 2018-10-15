@@ -14,7 +14,7 @@ import model.Usuario;
 public class UsuarioDAO {
     
     private String SQL_SELECIONAR = "select UsuId, CurId, UniId, CidId, UsuNome, UsuEmail, UsuSenha, UsuDireito, UsuAtivo, " +
-                                    "       UsuDataNasc, UsuDataCad, UsuAudio " +
+                                    "       UsuDataCad " +
                                     "from usuario " +
                                     "where UsuEmail = ? " +         
                                     "order by UsuNome";
@@ -45,7 +45,6 @@ public class UsuarioDAO {
             Usuario usuario = new Usuario();
             if (result.next()) {
                 Boolean ativo = result.getInt("UsuAtivo") == 1;
-                Boolean audioAtivo = result.getInt("UsuAudio") == 1;
                 
                 usuario = new Usuario(
                         result.getInt("UsuId"), 
@@ -54,15 +53,12 @@ public class UsuarioDAO {
                         result.getString("UsuSenha"),
                         result.getString("UsuDireito"),
                         ativo,
-                        null,
                         new CidadeDAO().Selecionar(result.getInt("CidId")),
-                        result.getDate("UsuDataNasc"),
                         new UniversidadeDAO().Selecionar(result.getInt("UniId")),
                         new CursoDAO().Selecionar(result.getInt("CurId")),
                         null,
                         null,
                         result.getDate("UsuDataCad"),
-                        audioAtivo,
                         this.SelecionarPosicaoRanking(result.getInt("UsuId"))
                 );       
             }

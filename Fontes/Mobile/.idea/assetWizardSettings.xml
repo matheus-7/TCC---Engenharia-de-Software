@@ -18,7 +18,7 @@
                                 <PersistentState>
                                   <option name="values">
                                     <map>
-                                      <entry key="url" value="jar:file:/C:/Program%20Files/Android/Android%20Studio/plugins/android/lib/android.jar!/images/material_design_icons/action/ic_timeline_black_24dp.xml" />
+                                      <entry key="url" value="jar:file:/C:/Program%20Files/Android/Android%20Studio/plugins/android/lib/android.jar!/images/material_design_icons/action/ic_stars_black_24dp.xml" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -28,10 +28,12 @@
                         </option>
                         <option name="values">
                           <map>
-                            <entry key="color" value="a69b9a" />
-                            <entry key="outputName" value="ic_aproveitamento_50dp" />
+                            <entry key="color" value="003762" />
+                            <entry key="height" value="50" />
+                            <entry key="outputName" value="ic_star_50dp" />
                             <entry key="overrideSize" value="true" />
                             <entry key="sourceFile" value="C:\Users\maath" />
+                            <entry key="width" value="50" />
                           </map>
                         </option>
                       </PersistentState>

@@ -348,8 +348,6 @@ public class AlterarPerfilFragment extends Fragment implements AdapterView.OnIte
             ListarUniversidades();
             ListarCursos();
 
-            PreencherDadosUsuario();
-
             return "";
         }
 
@@ -360,6 +358,8 @@ public class AlterarPerfilFragment extends Fragment implements AdapterView.OnIte
 
         @Override
         protected void onPostExecute(String result) {
+            PreencherDadosUsuario();
+
             ArrayAdapter adapterEstado = new ArrayAdapter(getActivity(),
                     android.R.layout.simple_spinner_item, estados);
             ArrayAdapter adapterUniversidade = new ArrayAdapter(getActivity(),

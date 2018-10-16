@@ -190,8 +190,6 @@ public class EstatisticasFragment extends Fragment {
                     usuario = gson.fromJson(obj.toString(), type);
                 }
 
-                tvRankingGeral.setText(String.valueOf(usuario.getPosicaoRanking()) + "º");
-
                 ListarConquistas();
                 ListarRespostas();
             }
@@ -217,8 +215,6 @@ public class EstatisticasFragment extends Fragment {
                     List<Conquista> conquistas = gson.fromJson(JSONArray.toString(), type);
 
                     usuario.setConquistas(conquistas);
-
-                    tvConquistasGeral.setText(String.valueOf(usuario.getConquistas().size()));
                 }
             } catch (Exception E) {
 
@@ -240,9 +236,6 @@ public class EstatisticasFragment extends Fragment {
                     List<Resposta> respostas = gson.fromJson(JSONArray.toString(), type);
 
                     usuario.setRespostas(respostas);
-
-                    SomarPontos();
-                    CalcularAcertos();
                 }
 
 
@@ -375,6 +368,12 @@ public class EstatisticasFragment extends Fragment {
 
         @Override
         protected void onPostExecute(String result) {
+            tvRankingGeral.setText(String.valueOf(usuario.getPosicaoRanking()) + "º");
+            tvConquistasGeral.setText(String.valueOf(usuario.getConquistas().size()));
+
+            SomarPontos();
+            CalcularAcertos();
+
             dialog.dismiss();
         }
 

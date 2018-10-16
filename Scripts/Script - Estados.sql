@@ -41,6 +41,6 @@ Insert into Estado2 (CodigoUf, Nome, Uf, Regiao) values (17, 'Tocantins', 'TO', 
 
 insert into estado (EstNome, EstUf)
 select Nome, Uf
-from estado2
+from estado2;
 
-drop table estado2
+drop table estado2;

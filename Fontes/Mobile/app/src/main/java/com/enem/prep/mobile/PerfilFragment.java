@@ -198,6 +198,10 @@ public class PerfilFragment extends Fragment {
         private String email;
         private org.json.JSONArray JSONArray;
         private Context context;
+        private double soma = 0;
+        private int respostas = 0;
+        private int acertos = 0;
+        private double aproveitamento = 0;
 
 
         public SelecionarTask(String email, Context context) {
@@ -223,7 +227,6 @@ public class PerfilFragment extends Fragment {
 
                 ListarConquistas();
                 ListarRespostas();
-                PreencherPerfil();
             }
             catch (Exception e){
                 return "Não foi realizar esta ação. Tente novamente mais tarde!";
@@ -247,8 +250,6 @@ public class PerfilFragment extends Fragment {
                     List<Conquista> conquistas = gson.fromJson(JSONArray.toString(), type);
 
                     usuario.setConquistas(conquistas);
-
-                    tvConquistas.setText(String.valueOf(usuario.getConquistas().size()));
                 }
             } catch (Exception E) {
 
@@ -282,24 +283,37 @@ public class PerfilFragment extends Fragment {
         }
 
         private void SomarPontos(){
-            double soma = 0;
-            DecimalFormat df = new DecimalFormat("#,###");
-
             for(Resposta res : usuario.getRespostas()) soma += res.getPontuacao();
-
-            tvPontos.setText(df.format(soma));
         }
 
         private void CalcularAcertos(){
             DecimalFormat df = new DecimalFormat("#,###.00");
-            int respostas = usuario.getRespostas().size();
-            int acertos = 0;
+            respostas = usuario.getRespostas().size();
+            acertos = 0;
 
             for(Resposta res : usuario.getRespostas()){
                 if (res.getPontuacao() > 0) acertos++;
             }
 
-            double aproveitamento = (new Double(acertos) * 100) / new Double(respostas);
+            aproveitamento = (new Double(acertos) * 100) / new Double(respostas);
+        }
+
+        private void PreencherPerfil(){
+            DecimalFormat df = new DecimalFormat("#,###");
+
+            btnUserConquistas.setText(usuario.getNome().substring(0, 1));
+            tvNomeUsuario.setText(usuario.getNome());
+
+            tvUniversidade.setText(usuario.getUniversidade().getNome());
+            tvCurso.setText(usuario.getCurso().getNome());
+            if (usuario.getCidade().getId() != 0){
+                tvCidade.setText(usuario.getCidade().getNome() + ", " + usuario.getCidade().getEstado().getNome());
+            }
+
+
+            tvRanking.setText(String.valueOf(usuario.getPosicaoRanking()) + "º");
+            tvPontos.setText(df.format(soma));
+            tvConquistas.setText(String.valueOf(usuario.getConquistas().size()));
 
             tvRespostas.setText(String.valueOf(respostas));
             tvAcertos.setText(String.valueOf(acertos));
@@ -307,19 +321,10 @@ public class PerfilFragment extends Fragment {
             if (aproveitamento >= 0) tvAproveitamento.setText(df.format(aproveitamento) + " %");
         }
 
-        private void PreencherPerfil(){
-            btnUserConquistas.setText(usuario.getNome().substring(0, 1));
-            tvNomeUsuario.setText(usuario.getNome());
-
-            tvUniversidade.setText(usuario.getUniversidade().getNome());
-            tvCurso.setText(usuario.getCurso().getNome());
-            tvCidade.setText(usuario.getCidade().getNome() + ", " + usuario.getCidade().getEstado().getNome());
-
-            tvRanking.setText(String.valueOf(usuario.getPosicaoRanking()) + "º");
-        }
-
         @Override
         protected void onPostExecute(String result) {
+            PreencherPerfil();
+
             dialog.dismiss();
         }
 

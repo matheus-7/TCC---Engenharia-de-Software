@@ -185,9 +185,6 @@ public class ConquistasFragment extends Fragment {
                 usuario.setNome(obj.getString("nome"));
                 usuario.setEmail(email);
 
-                btnUserConquistas.setText(usuario.getNome().substring(0, 1));
-                tvNomeUsuario.setText(usuario.getNome());
-
                 try {
                     JSONArray = conquistaDAO.Listar(usuario.getId());
                 } catch (Exception e) {
@@ -218,6 +215,9 @@ public class ConquistasFragment extends Fragment {
         protected void onPostExecute(String result) {
             ConquistasAdapter adapter = new ConquistasAdapter(context, usuario.getConquistas());
             lvListaConquistas.setAdapter(adapter);
+
+            btnUserConquistas.setText(usuario.getNome().substring(0, 1));
+            tvNomeUsuario.setText(usuario.getNome());
 
             dialog.dismiss();
         }

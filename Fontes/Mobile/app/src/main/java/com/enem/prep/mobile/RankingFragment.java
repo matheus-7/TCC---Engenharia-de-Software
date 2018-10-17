@@ -1,19 +1,36 @@
 package com.enem.prep.mobile;
 
+import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ListView;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.lang.reflect.Type;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
 import adapter.RankingAdapter;
+import dao.ConquistaDAO;
+import dao.RespostaDAO;
+import dao.UsuarioDAO;
+import models.Conquista;
+import models.Resposta;
 import models.Usuario;
 
 
@@ -30,6 +47,18 @@ public class RankingFragment extends Fragment {
     private Button btnGeral = null;
     private Button btnUniversidade = null;
     private Button btnCurso = null;
+
+    private Usuario usuario = null;
+
+    private List<Usuario> rankingGeral = null;
+    private List<Usuario> rankingCurso = null;
+    private List<Usuario> rankingUniversidade = null;
+
+    private FragmentManager fragmentManager = null;
+
+    private final UsuarioDAO usuarioDAO = new UsuarioDAO();
+    private final ConquistaDAO conquistaDAO = new ConquistaDAO();
+    private final RespostaDAO respostaDAO = new RespostaDAO();
 
     private OnFragmentInteractionListener mListener;
 
@@ -62,6 +91,11 @@ public class RankingFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_ranking, container, false);
 
+        fragmentManager = getActivity().getSupportFragmentManager();
+        SharedPreferences prefs = getActivity().getSharedPreferences("Preferencias", 0);
+        String emailUsuario = prefs.getString("email", "defaultStringIfNothingFound");
+        final Context cont = this.getActivity();
+
         btnGeral = (Button) view.findViewById(R.id.btnGeral);
         btnUniversidade = (Button) view.findViewById(R.id.btnUniversidade);
         btnCurso = (Button) view.findViewById(R.id.btnCurso);
@@ -72,6 +106,9 @@ public class RankingFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 SelecionarTipo(btnGeral);
+
+                RankingAdapter adapter = new RankingAdapter(cont, rankingGeral, usuario, fragmentManager, getActivity());
+                lvListaRanking.setAdapter(adapter);
             }
         });
 
@@ -79,6 +116,9 @@ public class RankingFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 SelecionarTipo(btnUniversidade);
+
+                RankingAdapter adapter = new RankingAdapter(cont, rankingUniversidade, usuario, fragmentManager, getActivity());
+                lvListaRanking.setAdapter(adapter);
             }
         });
 
@@ -86,30 +126,13 @@ public class RankingFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 SelecionarTipo(btnCurso);
+
+                RankingAdapter adapter = new RankingAdapter(cont, rankingCurso, usuario, fragmentManager, getActivity());
+                lvListaRanking.setAdapter(adapter);
             }
         });
 
-        Usuario usu1 = new Usuario();
-        Usuario usu2 = new Usuario();
-        Usuario usu3 = new Usuario();
-
-        usu1.setNome("Matheus Socoloski Velho");
-        usu2.setNome("Maiana Zatti");
-        usu3.setNome("Larissa Rodrigues dos Santos");
-
-        List<Usuario> usuarios = new ArrayList<Usuario>();
-
-        usuarios.add(usu1);
-        usuarios.add(usu2);
-        usuarios.add(usu3);
-        usuarios.add(usu3);
-        usuarios.add(usu3);
-        usuarios.add(usu3);
-        usuarios.add(usu3);
-        usuarios.add(usu3);
-
-        RankingAdapter adapter = new RankingAdapter(this.getActivity(), usuarios);
-        lvListaRanking.setAdapter(adapter);
+        new SelecionarTask(emailUsuario, cont).execute();
 
         return view;
     }
@@ -146,7 +169,152 @@ public class RankingFragment extends Fragment {
 
 
     public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
+    }
+
+
+
+    private class SelecionarTask extends AsyncTask<String, Void, String> {
+
+        private ProgressDialog dialog;
+        private String email;
+        private org.json.JSONArray JSONArray;
+        private Context context;
+
+
+        public SelecionarTask(String email, Context context) {
+            this.email = email;
+            this.context = context;
+        }
+
+        @Override
+        protected String doInBackground(String... params) {
+
+            usuario = new Usuario();
+
+            try
+            {
+                JSONObject obj = usuarioDAO.Selecionar(email);
+
+                if (obj != null) {
+                    Gson gson = new Gson();
+                    Type type = new TypeToken<Usuario>() {
+                    }.getType();
+                    usuario = gson.fromJson(obj.toString(), type);
+                }
+
+                ListarRanking();
+            }
+            catch (Exception e){
+                return "Não foi realizar esta ação. Tente novamente mais tarde!";
+            }
+
+            return "";
+        }
+
+        private void ListarRespostas(List<Usuario> usuarios){
+            for(Usuario usu : usuarios) {
+                try {
+                    JSONArray = respostaDAO.Listar(usu.getId());
+                } catch (Exception e) {
+
+                }
+
+                try {
+                    if (JSONArray != null) {
+                        Gson gson = new Gson();
+                        Type type = new TypeToken<List<Resposta>>() {
+                        }.getType();
+                        List<Resposta> respostas = gson.fromJson(JSONArray.toString(), type);
+
+                        usu.setRespostas(respostas);
+                    }
+                } catch (Exception E) {}
+            }
+
+        }
+
+        private void ListarRanking(){
+            boolean existe = false;
+
+            try {
+                JSONArray = usuarioDAO.ListarRanking(0, 0);
+            } catch (Exception e) {}
+
+            try {
+                if (JSONArray != null) {
+                    Gson gson = new Gson();
+                    Type type = new TypeToken<List<Usuario>>() {
+                    }.getType();
+                    rankingGeral = gson.fromJson(JSONArray.toString(), type);
+
+                    for(Usuario u : rankingGeral) {
+                        if (u.getEmail().equals(usuario.getEmail())) existe = true;
+                    }
+
+                    if (!existe) rankingGeral.add(usuario);
+
+                    ListarRespostas(rankingGeral);
+                }
+            } catch (Exception E) {}
+
+            try {
+                JSONArray = usuarioDAO.ListarRanking(usuario.getCurso().getId(), 0);
+            } catch (Exception e) {}
+
+            try {
+                if (JSONArray != null) {
+                    Gson gson = new Gson();
+                    Type type = new TypeToken<List<Usuario>>() {
+                    }.getType();
+                    rankingCurso = gson.fromJson(JSONArray.toString(), type);
+
+                    for(Usuario u : rankingCurso) {
+                        if (u.getEmail().equals(usuario.getEmail())) existe = true;
+                    }
+
+                    if (!existe) rankingCurso.add(usuario);
+
+                    ListarRespostas(rankingCurso);
+                }
+            } catch (Exception E) {}
+
+            try {
+                JSONArray = usuarioDAO.ListarRanking(0, usuario.getUniversidade().getId());
+            } catch (Exception e) {}
+
+            try {
+                if (JSONArray != null) {
+                    Gson gson = new Gson();
+                    Type type = new TypeToken<List<Usuario>>() {
+                    }.getType();
+                    rankingUniversidade = gson.fromJson(JSONArray.toString(), type);
+
+                    for(Usuario u : rankingUniversidade) {
+                        if (u.getEmail().equals(usuario.getEmail())) existe = true;
+                    }
+
+                    if (!existe) rankingUniversidade.add(usuario);
+
+                    ListarRespostas(rankingUniversidade);
+                }
+            } catch (Exception E) {}
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            RankingAdapter adapter = new RankingAdapter(context, rankingGeral, usuario, fragmentManager, getActivity());
+            lvListaRanking.setAdapter(adapter);
+
+            dialog.dismiss();
+        }
+
+        @Override
+        protected void onPreExecute() {
+            dialog = new ProgressDialog(getActivity(), R.style.MyAlertDialogStyle);
+            dialog.setMessage("Carregando...");
+            dialog.setIndeterminate(true);
+            dialog.show();
+        }
     }
 }

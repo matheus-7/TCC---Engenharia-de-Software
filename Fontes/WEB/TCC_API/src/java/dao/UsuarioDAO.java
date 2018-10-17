@@ -28,10 +28,24 @@ public class UsuarioDAO {
                                    "                   CurId = ? " +
                                    "where UsuId = ? " ;  
     
-    private String SQL_LISTAR_RANKING = "select UsuId " +
+    private String SQL_LISTAR_RANKING = "select resposta.UsuId, UsuEmail " +
                                         "from resposta " +
+                                        "   left join usuario " +
+                                        "      on resposta.UsuId = usuario.UsuId " +
+                                        "   left join universidade " +
+                                        "      on usuario.UniId = universidade.UniId " +
+                                        "   left join curso " +
+                                        "      on usuario.CurId = curso.CurId " +
+                                        "where (usuario.CurId = ? or ? = 0) " +
+                                        "   and (usuario.UniId = ? or ? = 0) " +
                                         "group by UsuId " +
-                                        "order by SUM(ResPontos) desc";
+                                        "order by SUM(ResPontos) desc " +
+                                        "limit 50";
+    
+    private String SQL_LISTAR_RANK = "select UsuId " +
+                                     "from resposta " +
+                                     "group by UsuId " +
+                                     "order by SUM(ResPontos) desc ";
     
     public Usuario Selecionar(String email) {
         Connection con = null;
@@ -161,7 +175,7 @@ public class UsuarioDAO {
         
         try {
             con = ConnectionFactory.getConnection();
-            stmt = con.prepareStatement(SQL_LISTAR_RANKING);
+            stmt = con.prepareStatement(SQL_LISTAR_RANK);
             result = stmt.executeQuery();
             while (result.next()) {
                 
@@ -180,6 +194,53 @@ public class UsuarioDAO {
             return posicao;
         } catch (SQLException ex) {
             throw new RuntimeException("Erro ao consultar uma lista de usuários. Origem=" + ex.getMessage());
+        } finally {
+            try {
+                result.close();
+            } catch (Exception ex) {
+                System.out.println("Erro ao fechar result set. Ex=" + ex.getMessage());
+            }
+            try {
+                stmt.close();
+            } catch (Exception ex) {
+                System.out.println("Erro ao fechar stmt. Ex=" + ex.getMessage());
+            }
+            try {
+                con.close();
+            } catch (Exception ex) {
+                System.out.println("Erro ao fechar conexão. Ex=" + ex.getMessage());
+            }
+        }
+    }
+    
+    
+    public List<Usuario> ListarRanking(int codigoCurso, int codigoUniversidade) {
+        Connection con = null;
+        PreparedStatement stmt = null;
+        ResultSet result = null;
+        
+        List<Usuario> lista = new ArrayList();
+        
+        try {
+            con = ConnectionFactory.getConnection();
+            stmt = con.prepareStatement(SQL_LISTAR_RANKING);
+            
+            stmt.setInt(1, codigoCurso);
+            stmt.setInt(2, codigoCurso);
+            stmt.setInt(3, codigoUniversidade);
+            stmt.setInt(4, codigoUniversidade);
+            
+            result = stmt.executeQuery();
+            while (result.next()) {
+                
+                Usuario usuario = this.Selecionar(result.getString("UsuEmail"));
+                               
+                lista.add(usuario);
+            }
+            
+            return lista;
+        } catch (SQLException ex) {
+            throw new RuntimeException("Erro ao consultar uma lista de universidades. Origem=" + ex.getMessage());
         } finally {
             try {
                 result.close();

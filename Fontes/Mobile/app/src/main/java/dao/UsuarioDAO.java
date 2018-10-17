@@ -5,6 +5,7 @@ import android.util.Log;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import models.Usuario;
@@ -20,6 +21,18 @@ public class UsuarioDAO {
             JSONObject jObject = new JSONObject(data);
 
             return jObject;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
+
+    public JSONArray ListarRanking(int idCurso, int idUniversidade) {
+        try {
+            String data = dao.doGet("/usuario/" + idCurso + "/" + idUniversidade);
+            JSONArray array = new JSONArray(data);
+            return array;
         } catch (Exception e) {
             e.printStackTrace();
         }

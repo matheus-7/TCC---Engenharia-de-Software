@@ -2,6 +2,7 @@
 package api;
 
 import dao.UsuarioDAO;
+import java.util.List;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.Consumes;
@@ -29,6 +30,13 @@ public class UsuarioResource {
     @Produces(MediaType.APPLICATION_JSON)
     public Usuario selecionar(@PathParam("email") String email) {
         return UsuarioDAO.Selecionar(email);
+    }
+    
+    @GET
+    @Path("/{idCurso}/{idUniversidade}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Usuario> listarRanking(@PathParam("idCurso") int idCurso, @PathParam("idUniversidade") int idUniversidade) {
+        return UsuarioDAO.ListarRanking(idCurso, idUniversidade);
     }
     
     @POST

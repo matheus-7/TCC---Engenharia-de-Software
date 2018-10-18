@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -47,6 +48,7 @@ public class RankingFragment extends Fragment {
     private Button btnGeral = null;
     private Button btnUniversidade = null;
     private Button btnCurso = null;
+    private TextView tvTipoRanking = null;
 
     private Usuario usuario = null;
 
@@ -100,12 +102,16 @@ public class RankingFragment extends Fragment {
         btnUniversidade = (Button) view.findViewById(R.id.btnUniversidade);
         btnCurso = (Button) view.findViewById(R.id.btnCurso);
 
+        tvTipoRanking = (TextView) view.findViewById(R.id.tvTipoRanking);
+
         lvListaRanking = (ListView) view.findViewById(R.id.lvListaRanking);
 
         btnGeral.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 SelecionarTipo(btnGeral);
+
+                tvTipoRanking.setText("Ranking: Geral");
 
                 RankingAdapter adapter = new RankingAdapter(cont, rankingGeral, usuario, fragmentManager, getActivity());
                 lvListaRanking.setAdapter(adapter);
@@ -117,6 +123,11 @@ public class RankingFragment extends Fragment {
             public void onClick(View v) {
                 SelecionarTipo(btnUniversidade);
 
+                if (usuario.getUniversidade().getId() != 0){
+                    tvTipoRanking.setText("Ranking: " + usuario.getUniversidade().getNome());
+                }
+                else tvTipoRanking.setText("");
+
                 RankingAdapter adapter = new RankingAdapter(cont, rankingUniversidade, usuario, fragmentManager, getActivity());
                 lvListaRanking.setAdapter(adapter);
             }
@@ -126,6 +137,12 @@ public class RankingFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 SelecionarTipo(btnCurso);
+
+                if (usuario.getUniversidade().getId() != 0){
+                    tvTipoRanking.setText("Ranking: " + usuario.getCurso().getNome());
+                }
+                else tvTipoRanking.setText("");
+
 
                 RankingAdapter adapter = new RankingAdapter(cont, rankingCurso, usuario, fragmentManager, getActivity());
                 lvListaRanking.setAdapter(adapter);

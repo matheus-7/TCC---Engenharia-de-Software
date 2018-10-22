@@ -35,9 +35,6 @@
             
             <div class="navbar-menu" id="navMenu">
                 <div class="navbar-start">
-                    <a class="navbar-item" href="#">
-                        Home
-                    </a>
                     
                     <div class="navbar-item has-dropdown is-hoverable">
                         <a class="navbar-link" href="#">
@@ -69,10 +66,7 @@
                             </a>
                         </div>
                     </div>
-                    
-                    <a class="navbar-item" href="#">
-                        Sair
-                    </a>
+
                 </div>
             </div>
         </nav>
@@ -109,7 +103,7 @@
                                         <label class="label">Estado:</label>
                                         <div class="control">
                                             <div class="select">
-                                                <select name="estado" id="estado">
+                                                <select name="estado" id="estado" onchange="filtrarCidades();">
                                                     <c:forEach var="estado" items="${estados}" varStatus="inf">    
                                                         <option value="${estado.getId()}" <c:if test="${estado.getId() == universidade.getCidade().getEstado().getId()}">selected</c:if>>${estado.getNome()}</option>
                                                     </c:forEach>    
@@ -136,10 +130,10 @@
                                         <table class="table is-fullwidth" id="tbCursos">
                                             <thead>
                                                 <tr id="header"> 
+                                                    <th/>
                                                     <th style="width: 90%">
                                                         
                                                     </th>
-                                                    <th/>
                                                 </tr>
                                             </thead>
 
@@ -148,10 +142,10 @@
                                                 <c:forEach var="curso" items="${cursos}" varStatus="inf">
                                                     <tr>
                                                         <td>
-                                                            ${curso.getNome()}
+                                                            <input type="checkbox" name="cbCurso" value="${curso.getId()}" <c:if test="${universidade.getCursos().indexOf(curso) != -1}">checked</c:if>>
                                                         </td>
                                                         <td>
-                                                            <input type="checkbox" name="cbCurso" value="${curso.getId()}" <c:if test="${universidade.getCursos().indexOf(curso) != -1}">checked</c:if>>
+                                                            ${curso.getNome()}
                                                         </td>
                                                     </tr>
                                                 </c:forEach>
@@ -183,6 +177,6 @@
                 </form>
                 
             </div>
-        </section>
+        </section>                        
     </body>
 </html>

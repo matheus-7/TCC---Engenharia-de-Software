@@ -823,3 +823,32 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
 });
+
+
+function filtrarCidades() {
+    var xhttp = null;
+    if (window.XMLHttpRequest) {
+        //code for modern browsers
+        xhttp = new XMLHttpRequest();
+    } else {
+        // code for old IE browsers
+        xhttp = new ActiveXObject("Microsoft.XMLHTTP");
+    }
+    
+    xhttp.onreadystatechange = function() {
+        if(this.readyState == 3) {
+            console.log("Processando");
+        } 
+        if(this.readyState == 4 && this.status == 200) {
+          document.getElementById("cidade").innerHTML = this.responseText;
+          console.log("Pronto");
+        }
+    };
+    
+    xhttp.open("POST", "/TCC/UniversidadeServlet", true);
+    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhttp.send("acao=filtrarCidades&idEstado=" + document.getElementById("estado").value);
+}
+
+
+

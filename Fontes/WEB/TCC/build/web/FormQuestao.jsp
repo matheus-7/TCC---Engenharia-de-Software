@@ -35,9 +35,6 @@
             
             <div class="navbar-menu" id="navMenu">
                 <div class="navbar-start">
-                    <a class="navbar-item" href="#">
-                        Home
-                    </a>
                     
                     <div class="navbar-item has-dropdown is-hoverable">
                         <a class="navbar-link" href="#">
@@ -69,10 +66,7 @@
                             </a>
                         </div>
                     </div>
-                    
-                    <a class="navbar-item" href="#">
-                        Sair
-                    </a>
+
                 </div>
             </div>
         </nav>
@@ -134,30 +128,72 @@
                             </tbody>
                         </table>
                         
+                        <label class="label">Alternativas:</label>                
                         <table class="table is-fullwidth">
                             <tbody>
                                 <tr>
-                                    <td style="width: 80%" rowspan="2">
-                                        <label class="label">Alternativa:</label>
+                                    <td style="width: 80%" >
                                         <div class="control">
-                                            <textarea name="alternativa" rows="2" class="textarea" placeholder="Alternativa"></textarea>
+                                            <input name="alternativa1" class="input" placeholder="Alternativa 1"></input>
                                         </div>
                                     </td>
                                     <td style="width: 20%">
                                         <label class="checkbox">
-                                            <input type="checkbox">
+                                            <input type="radio" name="correta">
                                             Alternativa Correta
                                         </label>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td>
-                                        <a class="button is-primary">
-                                            <span class="icon is-small">
-                                                <i class="fas fa-plus"></i>
-                                            </span>
-                                            <span>Adicionar</span>
-                                        </a>
+                                    <td style="width: 80%" >
+                                        <div class="control">
+                                            <input name="alternativa2" class="input" placeholder="Alternativa 2"></input>
+                                        </div>
+                                    </td>
+                                    <td style="width: 20%">
+                                        <label class="checkbox">
+                                            <input type="radio" name="correta">
+                                            Alternativa Correta
+                                        </label>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 80%" >
+                                        <div class="control">
+                                            <input name="alternativa3" class="input" placeholder="Alternativa 3"></input>
+                                        </div>
+                                    </td>
+                                    <td style="width: 20%">
+                                        <label class="checkbox">
+                                            <input type="radio" name="correta">
+                                            Alternativa Correta
+                                        </label>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 80%" >
+                                        <div class="control">
+                                            <input name="alternativa4" class="input" placeholder="Alternativa 4"></input>
+                                        </div>
+                                    </td>
+                                    <td style="width: 20%">
+                                        <label class="checkbox">
+                                            <input type="radio" name="correta">
+                                            Alternativa Correta
+                                        </label>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 80%" >
+                                        <div class="control">
+                                            <input name="alternativa5" class="input" placeholder="Alternativa 5"></input>
+                                        </div>
+                                    </td>
+                                    <td style="width: 20%">
+                                        <label class="checkbox">
+                                            <input type="radio" name="correta">
+                                            Alternativa Correta
+                                        </label>
                                     </td>
                                 </tr>
                             </tbody>

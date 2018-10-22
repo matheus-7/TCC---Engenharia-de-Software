@@ -127,22 +127,22 @@ public class UsuarioServlet extends HttpServlet {
     private boolean validarUsuario(Usuario usuario, HttpServletRequest request, HttpServletResponse response){
         try {
             if (usuario.getNome() == null || usuario.getNome().equals("")){
-                request.setAttribute("erro", "O preenchimento do campo 'Nome' é obrigatório");
+                request.setAttribute("erro", "O preenchimento de todos os campos é obrigatório");
                 redirectUsuarioCadastro(request, response, usuario);
                 return false;
             }
             else if (usuario.getEmail() == null || usuario.getEmail().equals("")){
-                request.setAttribute("erro", "O preenchimento do campo 'E-mail' é obrigatório");
+                request.setAttribute("erro", "O preenchimento de todos os campos é obrigatório");
                 redirectUsuarioCadastro(request, response, usuario);
                 return false;
             }
             else if (usuario.getSenha() == null || usuario.getSenha().equals("")){
-                request.setAttribute("erro", "O preenchimento do campo 'Senha' é obrigatório");
+                request.setAttribute("erro", "O preenchimento de todos os campos é obrigatório");
                 redirectUsuarioCadastro(request, response, usuario);
                 return false;
             }
             if (usuario.getDireito() == null || usuario.getDireito().equals("")){
-                request.setAttribute("erro", "O preenchimento do campo 'Direito' é obrigatório");
+                request.setAttribute("erro", "O preenchimento de todos os campos é obrigatório");
                 redirectUsuarioCadastro(request, response, usuario);
                 return false;
             }

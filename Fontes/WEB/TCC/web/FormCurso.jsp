@@ -35,9 +35,6 @@
             
             <div class="navbar-menu" id="navMenu">
                 <div class="navbar-start">
-                    <a class="navbar-item" href="#">
-                        Home
-                    </a>
                     
                     <div class="navbar-item has-dropdown is-hoverable">
                         <a class="navbar-link" href="#">
@@ -70,9 +67,6 @@
                         </div>
                     </div>
                     
-                    <a class="navbar-item" href="#">
-                        Sair
-                    </a>
                 </div>
             </div>
         </nav>

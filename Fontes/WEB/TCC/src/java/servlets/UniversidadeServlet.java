@@ -54,16 +54,20 @@ public class UniversidadeServlet extends HttpServlet {
                                 
                 redirectUniversidadeCadastro(request, response, universidade);
             }
-            else if (acao.equals("listarCidades")){
-                int idEstado = Integer.valueOf(request.getParameter("estado"));
-                
-                List<Estado> estados = estadoDao.Listar();
+            else if (acao.equals("filtrarCidades")){
+                int idEstado = Integer.valueOf(request.getParameter("idEstado"));
+
+                List<Cidade> cidades = CidadeDao.Listar(idEstado);
                                 
-                request.setAttribute("estados", estados);
+                PrintWriter pw =  response.getWriter();
                 
-                for (Estado estado : estados){
-                    if (estado.getId() == idEstado) request.setAttribute("cidades", estado.getCidades());
-                }                
+                for (Cidade cidade: cidades) {
+                    pw.println("<option value='"+cidade.getId()+"'>");
+                    pw.println(cidade.getNome());
+                    pw.println("</option>");
+                }
+                
+                pw.close();               
             }
             else if (acao.equals("salvar")){
                 int id = 0;
@@ -163,7 +167,7 @@ public class UniversidadeServlet extends HttpServlet {
     private boolean validarUniversidade(Universidade universidade, HttpServletRequest request, HttpServletResponse response){
         try {
             if (universidade.getNome() == null || universidade.getNome() == ""){
-                request.setAttribute("erro", "O preenchimento do campo 'Universidade' é obrigatório");
+                request.setAttribute("erro", "O preenchimento de todos os campos é obrigatório");
                 redirectUniversidadeCadastro(request, response, universidade);
                 return false;
             }

@@ -40,7 +40,7 @@ public class LoginServlet extends HttpServlet {
                     return;
                 }
                 else if (!usuario.getDireito().equals("Administrador")){
-                    request.setAttribute("erro", "Este usuário não possui permissão para acessar o painel admnistrativo!");
+                    request.setAttribute("erro", "Este usuário não possui permissão para acessar o painel administrativo!");
                     redirectLogin(request, response);
                     return;
                 }
@@ -59,7 +59,7 @@ public class LoginServlet extends HttpServlet {
     
     private void redirect(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.sendRedirect("Principal.html");
+        response.sendRedirect("QuestaoServlet");
     }
     
     private void redirectLogin(HttpServletRequest request, HttpServletResponse response)

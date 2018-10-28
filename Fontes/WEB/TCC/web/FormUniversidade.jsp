@@ -88,7 +88,7 @@
                 
                 <label class="label help is-danger">${erro}</label>
                                                 
-                <form method="POST" action="UniversidadeServlet?acao=salvar">
+                <form method="POST" action="UniversidadeServlet?acao=salvar" accept-charset="iso-8859-1,utf-8">
                     <div class="field">
                         <table class="table is-fullwidth">
                             <tbody>
@@ -124,27 +124,23 @@
                                         </div>
                                     </td>
                                 </tr>
+                            </tbody>
+                        </table>
+                                        
+                        <table class="table is-fullwidth">
+                            <tbody>
                                 <tr>
                                     <td style="width: 100%">
                                         <label class="label">Cursos:</label>   
                                         <table class="table is-fullwidth" id="tbCursos">
-                                            <thead>
-                                                <tr id="header"> 
-                                                    <th/>
-                                                    <th style="width: 90%">
-                                                        
-                                                    </th>
-                                                </tr>
-                                            </thead>
-
                                             <tbody>
 
                                                 <c:forEach var="curso" items="${cursos}" varStatus="inf">
-                                                    <tr>
-                                                        <td>
-                                                            <input type="checkbox" name="cbCurso" value="${curso.getId()}" <c:if test="${universidade.getCursos().indexOf(curso) != -1}">checked</c:if>>
+                                                    <tr style="cursor: pointer" onclick="check(this)">
+                                                        <td style="width: 5%; ">
+                                                            <input type="checkbox" name="cbCurso${curso.getId()}" id="cbCurso" value="${curso.getId()}" <c:if test="${universidade.checkCurso(curso)}">checked</c:if>>
                                                         </td>
-                                                        <td>
+                                                        <td style="width: 95%">
                                                             ${curso.getNome()}
                                                         </td>
                                                     </tr>

@@ -23,9 +23,7 @@ public class RespostaDAO {
 
             data = dao.doPost("/resposta", json.toJson(respostas));
 
-            JSONObject jObject = new JSONObject(data);
-
-            return jObject;
+            return new JSONObject();
         } catch (Exception e) {
             e.printStackTrace();
         }

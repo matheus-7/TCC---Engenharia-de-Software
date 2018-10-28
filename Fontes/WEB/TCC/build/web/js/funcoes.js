@@ -850,5 +850,9 @@ function filtrarCidades() {
     xhttp.send("acao=filtrarCidades&idEstado=" + document.getElementById("estado").value);
 }
 
+function check(item){
+    $(item).find('#cbCurso').trigger('click');
+}
+
 
 

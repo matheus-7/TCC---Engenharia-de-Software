@@ -2,6 +2,7 @@
 package daos.universidade;
 
 import java.util.List;
+import models.Curso;
 import models.Universidade;
 
 
@@ -17,4 +18,8 @@ public interface UniversidadeDao {
     public void Excluir(int id);
     
     public void Inserir(Universidade universidade);
+    
+    public void InserirCursos(List<Curso> cursos, int idUniversidade);
+    
+    public void ExcluirCursos(int idUniversidade);
 }

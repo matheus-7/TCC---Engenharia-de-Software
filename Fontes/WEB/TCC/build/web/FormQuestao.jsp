@@ -88,7 +88,7 @@
                 
                 <label class="label help is-danger">${erro}</label>
                                                 
-                <form method="POST" action="QuestaoServlet?acao=salvar">
+                <form method="POST" action="QuestaoServlet?acao=salvar" accept-charset="iso-8859-1,utf-8">
                     <div class="field">
                         <table class="table is-fullwidth">
                             <tbody>
@@ -121,7 +121,7 @@
                                     <td style="width: 100%" colspan="3">
                                         <label class="label">Descrição:</label>
                                         <div class="control">
-                                            <textarea name="descricao" rows="2" class="textarea" value="${questao.getDescricao()}" placeholder="Descrição"></textarea>
+                                            <textarea name="descricao" rows="2" class="textarea" placeholder="Descrição">${questao.getDescricao()}</textarea>
                                         </div>
                                     </td>
                                 </tr>
@@ -134,12 +134,13 @@
                                 <tr>
                                     <td style="width: 80%" >
                                         <div class="control">
-                                            <input name="alternativa1" class="input" placeholder="Alternativa 1"></input>
+                                            <input name="alternativa1Id" type="hidden" value="${questao.getAlternativas().get(0).getId()}" />
+                                            <input name="alternativa1" class="input" value="${questao.getAlternativas().get(0).getDescricao()}" placeholder="Alternativa 1"></input>
                                         </div>
                                     </td>
                                     <td style="width: 20%">
                                         <label class="checkbox">
-                                            <input type="radio" name="correta">
+                                            <input type="radio" name="correta" value="correta1" <c:if test="${questao.getAlternativas().get(0).getCorreta()}">checked</c:if>>
                                             Alternativa Correta
                                         </label>
                                     </td>
@@ -147,12 +148,13 @@
                                 <tr>
                                     <td style="width: 80%" >
                                         <div class="control">
-                                            <input name="alternativa2" class="input" placeholder="Alternativa 2"></input>
+                                            <input name="alternativa2Id" type="hidden" value="${questao.getAlternativas().get(1).getId()}" />
+                                            <input name="alternativa2" class="input" value="${questao.getAlternativas().get(1).getDescricao()}" placeholder="Alternativa 2"></input>
                                         </div>
                                     </td>
                                     <td style="width: 20%">
                                         <label class="checkbox">
-                                            <input type="radio" name="correta">
+                                            <input type="radio" name="correta" value="correta2" <c:if test="${questao.getAlternativas().get(1).getCorreta()}">checked</c:if>>
                                             Alternativa Correta
                                         </label>
                                     </td>
@@ -160,12 +162,13 @@
                                 <tr>
                                     <td style="width: 80%" >
                                         <div class="control">
-                                            <input name="alternativa3" class="input" placeholder="Alternativa 3"></input>
+                                            <input name="alternativa3Id" type="hidden" value="${questao.getAlternativas().get(2).getId()}" />
+                                            <input name="alternativa3" class="input" value="${questao.getAlternativas().get(2).getDescricao()}" placeholder="Alternativa 3"></input>
                                         </div>
                                     </td>
                                     <td style="width: 20%">
                                         <label class="checkbox">
-                                            <input type="radio" name="correta">
+                                            <input type="radio" name="correta" value="correta3" <c:if test="${questao.getAlternativas().get(2).getCorreta()}">checked</c:if>>
                                             Alternativa Correta
                                         </label>
                                     </td>
@@ -173,12 +176,13 @@
                                 <tr>
                                     <td style="width: 80%" >
                                         <div class="control">
-                                            <input name="alternativa4" class="input" placeholder="Alternativa 4"></input>
+                                            <input name="alternativa4Id" type="hidden" value="${questao.getAlternativas().get(3).getId()}" />
+                                            <input name="alternativa4" class="input" value="${questao.getAlternativas().get(3).getDescricao()}" placeholder="Alternativa 4"></input>
                                         </div>
                                     </td>
                                     <td style="width: 20%">
                                         <label class="checkbox">
-                                            <input type="radio" name="correta">
+                                            <input type="radio" name="correta" value="correta4" <c:if test="${questao.getAlternativas().get(3).getCorreta()}">checked</c:if>>
                                             Alternativa Correta
                                         </label>
                                     </td>
@@ -186,12 +190,13 @@
                                 <tr>
                                     <td style="width: 80%" >
                                         <div class="control">
-                                            <input name="alternativa5" class="input" placeholder="Alternativa 5"></input>
+                                            <input name="alternativa5Id" type="hidden" value="${questao.getAlternativas().get(4).getId()}" />
+                                            <input name="alternativa5" class="input" value="${questao.getAlternativas().get(4).getDescricao()}" placeholder="Alternativa 5"></input>
                                         </div>
                                     </td>
                                     <td style="width: 20%">
                                         <label class="checkbox">
-                                            <input type="radio" name="correta">
+                                            <input type="radio" name="correta" value="correta5" <c:if test="${questao.getAlternativas().get(4).getCorreta()}">checked</c:if>>
                                             Alternativa Correta
                                         </label>
                                     </td>

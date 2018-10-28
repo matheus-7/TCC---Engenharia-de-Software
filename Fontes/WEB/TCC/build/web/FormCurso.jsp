@@ -88,7 +88,7 @@
                 
                 <label class="label help is-danger">${erro}</label>
                                                 
-                <form method="POST" action="CursoServlet?acao=salvar">
+                <form method="POST" action="CursoServlet?acao=salvar" accept-charset="iso-8859-1,utf-8">
                     <div class="field">
                         <table class="table is-fullwidth">
                             <tbody>

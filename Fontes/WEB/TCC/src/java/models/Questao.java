@@ -58,6 +58,11 @@ public class Questao {
         this.dataCadastro = dataCadastro;
     }
     
+    public int getCodigoAtiva(){
+        if (this.getAtiva()) return 1;
+        else return 0;
+    }
+    
     
     public Questao(){};
     

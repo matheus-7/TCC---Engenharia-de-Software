@@ -11,8 +11,11 @@ import daos.universidade.UniversidadeDao;
 import daos.universidade.UniversidadeDaoImpl;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -84,7 +87,7 @@ public class UniversidadeServlet extends HttpServlet {
                 Cidade cidade = new Cidade();
                 cidade = CidadeDao.Selecionar(idCidade);
                 
-                universidade = new Universidade(id, nome, cidade, null, new Date(System.currentTimeMillis()));
+                universidade = new Universidade(id, nome, cidade, getCursos(request), new Date(System.currentTimeMillis()));
                 
                 try {
                     if (!validarUniversidade(universidade, request, response)) return;
@@ -132,6 +135,28 @@ public class UniversidadeServlet extends HttpServlet {
                 }
             }
         }
+    }
+    
+    private List<Curso> getCursos(HttpServletRequest request){
+        Map params = request.getParameterMap();
+        
+        List<Curso> cursos = new ArrayList();
+        
+        for (Iterator iterator = params.entrySet().iterator(); iterator.hasNext();)  {
+            Map.Entry entry = (Map.Entry) iterator.next();
+
+            if (entry.getKey().toString().startsWith("cbCurso")){
+                Curso curso = new Curso();
+                
+                String[] string = (String[]) entry.getValue();
+
+                curso.setId(Integer.parseInt(string[0]));
+
+                cursos.add(curso);
+            } 
+        }
+        
+        return cursos;
     }
     
     private void redirectUniversidades(HttpServletRequest request, HttpServletResponse response)

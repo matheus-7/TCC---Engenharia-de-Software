@@ -8,4 +8,5 @@ public interface AreaDao {
     
     public List<AreaDeConhecimento> Listar();
     
+    public AreaDeConhecimento Selecionar(int id);
 }

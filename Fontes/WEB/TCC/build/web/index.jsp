@@ -35,7 +35,7 @@
                 
                 <label class="label help is-danger">${erro}</label>
                                                 
-                <form method="POST" action="LoginServlet">
+                <form method="POST" action="LoginServlet" accept-charset="iso-8859-1,utf-8">
                     <div class="field">
                         <table class="table is-fullwidth">
                             <tbody>

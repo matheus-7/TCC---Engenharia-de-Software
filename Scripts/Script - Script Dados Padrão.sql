@@ -1,4 +1,7 @@
 
+insert into usuario (UsuNome, UsuEmail, UsuSenha, UsuDireito, UsuAtivo, UsuDataCad)
+             values ('Matheus Socoloski Velho', 'maatheeus10@hotmail.com', 'ÏÃÖÊÇ×Õ', 'Administrador', 1, NOW());
+
 insert into area_conhecimento (AreaNome)
                        values ('Ciências da Natureza e suas Tecnologias'),
 							  ('Ciências Humanas e suas Tecnologias'), 
@@ -332,7 +335,7 @@ insert into curso (CurNome, CurDataCad)
 			values('Engenharia de Software', NOW());
 			
 insert into universidade(CidId, UniNome, UniDataCad)
-                  values(1,     'UFPR', NOW());
+                  values(4006,     'UFPR', NOW());
 				  
 				  
 insert into universidade_curso (CurId, UniId)

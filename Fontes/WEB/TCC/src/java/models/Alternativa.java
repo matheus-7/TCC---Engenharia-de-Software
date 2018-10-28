@@ -41,6 +41,11 @@ public class Alternativa {
         this.questao = questao;
     }
     
+    public int getCodigoCorreta(){
+        if (this.getCorreta()) return 1;
+        else return 0;
+    }
+    
     
     public Alternativa(){}
     

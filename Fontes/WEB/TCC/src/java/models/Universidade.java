@@ -49,6 +49,21 @@ public class Universidade {
         this.dataCadastro = dataCadastro;
     }
     
+    public Boolean checkCurso(Curso curso){
+        Boolean existe = false;
+        
+        try{
+            for (Curso cur : getCursos()){
+                if (curso.getId() == cur.getId()) existe = true;
+            }
+        }
+        catch(Exception e){
+            
+        }       
+        
+        return existe;
+    }
+    
     
     public Universidade(){}
     

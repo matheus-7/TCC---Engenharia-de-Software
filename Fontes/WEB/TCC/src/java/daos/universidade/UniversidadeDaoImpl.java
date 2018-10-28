@@ -10,6 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import models.Curso;
 import models.Universidade;
 
 public class UniversidadeDaoImpl implements UniversidadeDao {
@@ -34,6 +35,10 @@ public class UniversidadeDaoImpl implements UniversidadeDao {
     private final String stmtSelecionar = "select UniId, CidId, UniNome, UniDataCad " +
                                           "from universidade " +
                                           "where UniId = ?";
+    
+    private final String stmtInserirCurso = "insert into universidade_curso (CurId, UniId) values (?, ?)";
+    
+    private final String stmtExcluirCursos = "delete from universidade_curso where UniId = ?";
     
     @Override
     public boolean Existe(Universidade universidade, int idAnterior) {
@@ -175,6 +180,9 @@ public class UniversidadeDaoImpl implements UniversidadeDao {
             stmt.setString(2, universidade.getNome());
             stmt.setInt(3, universidade.getId());
             stmt.executeUpdate();
+            
+            new UniversidadeDaoImpl().ExcluirCursos(universidade.getId());
+            new UniversidadeDaoImpl().InserirCursos(universidade.getCursos(), universidade.getId());
         } catch (SQLException ex) {
             throw new RuntimeException("Erro ao atualizar uma universidade no banco de dados. Origem=" + ex.getMessage());
         } finally {
@@ -229,9 +237,66 @@ public class UniversidadeDaoImpl implements UniversidadeDao {
                 stmt.setTimestamp(3, new java.sql.Timestamp(universidade.getDataCadastro().getTime()));
                 stmt.executeUpdate();
                 universidade.setId(getId(stmt));
+                
+                new UniversidadeDaoImpl().InserirCursos(universidade.getCursos(), universidade.getId());
             }
         } catch (SQLException ex) {
             throw new RuntimeException("Erro ao inserir uma universidade no banco de dados. Origem=" + ex.getMessage());
+        } finally {
+            try {
+                stmt.close();
+            } catch (Exception ex) {
+                System.out.println("Erro ao fechar stmt. Ex=" + ex.getMessage());
+            }
+            try {
+                con.close();
+            } catch (Exception ex) {
+                System.out.println("Erro ao fechar conexão. Ex=" + ex.getMessage());
+            }
+        }
+    }
+    
+    @Override
+    public void InserirCursos(List<Curso> cursos, int idUniversidade) {
+        Connection con = null;
+        PreparedStatement stmt = null;
+        try {
+            con = ConnectionFactory.getConnection();
+            stmt = con.prepareStatement(stmtInserirCurso, PreparedStatement.RETURN_GENERATED_KEYS);
+
+            for (Curso curso : cursos){
+                stmt.setInt(1, curso.getId());
+                stmt.setInt(2, idUniversidade);
+                
+                stmt.executeUpdate();
+            }
+        } catch (SQLException ex) {
+            throw new RuntimeException("Erro ao inserir um curso no banco de dados. Origem=" + ex.getMessage());
+        } finally {
+            try {
+                stmt.close();
+            } catch (Exception ex) {
+                System.out.println("Erro ao fechar stmt. Ex=" + ex.getMessage());
+            }
+            try {
+                con.close();
+            } catch (Exception ex) {
+                System.out.println("Erro ao fechar conexão. Ex=" + ex.getMessage());
+            }
+        }
+    }
+    
+    @Override
+    public void ExcluirCursos(int idUniversidade) {
+        Connection con = null;
+        PreparedStatement stmt = null;
+        try {
+            con = ConnectionFactory.getConnection();
+            stmt = con.prepareStatement(stmtExcluirCursos);
+            stmt.setInt(1, idUniversidade);
+            stmt.executeUpdate();
+        } catch (SQLException ex) {
+            throw new RuntimeException("Erro ao excluir cursos no banco de dados. Origem=" + ex.getMessage());
         } finally {
             try {
                 stmt.close();

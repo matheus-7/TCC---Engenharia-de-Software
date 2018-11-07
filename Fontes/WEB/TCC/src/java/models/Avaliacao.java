@@ -1,6 +1,7 @@
 
 package models;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Avaliacao {
@@ -50,6 +51,12 @@ public class Avaliacao {
     
     public void setData(Date data){
         this.data = data;
+    }
+    
+    public String getDataFormatada()
+    {
+        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+        return formato.format(getData());
     }
     
     

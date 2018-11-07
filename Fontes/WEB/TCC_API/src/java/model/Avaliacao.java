@@ -1,6 +1,7 @@
 
 package model;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Avaliacao {
@@ -52,6 +53,8 @@ public class Avaliacao {
         this.data = data;
     }
     
+
+
     
     public Avaliacao(){}
     

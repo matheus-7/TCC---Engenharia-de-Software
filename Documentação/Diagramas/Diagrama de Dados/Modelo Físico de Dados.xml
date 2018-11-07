@@ -268,6 +268,12 @@
 <OPTIONSELECT Value="0" />
 </OPTIONSELECTED>
 </COLUMN>
+<COLUMN ID="1467" ColName="cidade_CidId" PrevColName="" Pos="1" idDatatype="5" DatatypeParams="" Width="-1" Prec="-1" PrimaryKey="0" NotNull="1" AutoInc="0" IsForeignKey="1" DefaultValue="" Comments="">
+<OPTIONSELECTED>
+<OPTIONSELECT Value="1" />
+<OPTIONSELECT Value="0" />
+</OPTIONSELECTED>
+</COLUMN>
 <COLUMN ID="1371" ColName="curso_CurId" PrevColName="" Pos="1" idDatatype="5" DatatypeParams="" Width="-1" Prec="-1" PrimaryKey="0" NotNull="1" AutoInc="0" IsForeignKey="1" DefaultValue="" Comments="">
 <OPTIONSELECTED>
 <OPTIONSELECT Value="1" />
@@ -275,12 +281,6 @@
 </OPTIONSELECTED>
 </COLUMN>
 <COLUMN ID="1342" ColName="universidade_UniId" PrevColName="" Pos="1" idDatatype="5" DatatypeParams="" Width="-1" Prec="-1" PrimaryKey="0" NotNull="1" AutoInc="0" IsForeignKey="1" DefaultValue="" Comments="">
-<OPTIONSELECTED>
-<OPTIONSELECT Value="1" />
-<OPTIONSELECT Value="0" />
-</OPTIONSELECTED>
-</COLUMN>
-<COLUMN ID="1328" ColName="cidade_CidId" PrevColName="" Pos="1" idDatatype="5" DatatypeParams="" Width="-1" Prec="-1" PrimaryKey="0" NotNull="1" AutoInc="0" IsForeignKey="1" DefaultValue="" Comments="">
 <OPTIONSELECTED>
 <OPTIONSELECT Value="1" />
 <OPTIONSELECT Value="0" />
@@ -323,19 +323,14 @@
 <RELATION_START ID="1407" />
 </RELATIONS_START>
 <RELATIONS_END>
-<RELATION_END ID="1327" />
 <RELATION_END ID="1341" />
 <RELATION_END ID="1370" />
+<RELATION_END ID="1327" />
 </RELATIONS_END>
 <INDICES>
 <INDEX ID="1277" IndexName="PRIMARY" IndexKind="0" FKRefDef_Obj_id="-1">
 <INDEXCOLUMNS>
 <INDEXCOLUMN idColumn="1276" LengthParam="0" />
-</INDEXCOLUMNS>
-</INDEX>
-<INDEX ID="1329" IndexName="usuario_FKIndex1" IndexKind="1" FKRefDef_Obj_id="1327">
-<INDEXCOLUMNS>
-<INDEXCOLUMN idColumn="1328" LengthParam="0" />
 </INDEXCOLUMNS>
 </INDEX>
 <INDEX ID="1343" IndexName="usuario_FKIndex2" IndexKind="1" FKRefDef_Obj_id="1341">
@@ -346,6 +341,11 @@
 <INDEX ID="1372" IndexName="usuario_FKIndex3" IndexKind="1" FKRefDef_Obj_id="1370">
 <INDEXCOLUMNS>
 <INDEXCOLUMN idColumn="1371" LengthParam="0" />
+</INDEXCOLUMNS>
+</INDEX>
+<INDEX ID="1468" IndexName="usuario_FKIndex3" IndexKind="1" FKRefDef_Obj_id="1327">
+<INDEXCOLUMNS>
+<INDEXCOLUMN idColumn="1467" LengthParam="0" />
 </INDEXCOLUMNS>
 </INDEX>
 </INDICES>
@@ -380,7 +380,7 @@
 </INDEX>
 </INDICES>
 </TABLE>
-<TABLE ID="1298" Tablename="cidade" PrevTableName="Table_03" XPos="42" YPos="211" TableType="0" TablePrefix="0" nmTable="0" Temporary="0" UseStandardInserts="0" StandardInserts="\n" TableOptions="DelayKeyTblUpdates=0\nPackKeys=0\nRowChecksum=0\nRowFormat=0\nUseRaid=0\nRaidType=0\n" Comments="" Collapsed="0" IsLinkedObject="0" IDLinkedModel="-1" Obj_id_Linked="-1" OrderPos="4" >
+<TABLE ID="1298" Tablename="cidade" PrevTableName="Table_03" XPos="44" YPos="214" TableType="0" TablePrefix="0" nmTable="0" Temporary="0" UseStandardInserts="0" StandardInserts="\n" TableOptions="DelayKeyTblUpdates=0\nPackKeys=0\nRowChecksum=0\nRowFormat=0\nUseRaid=0\nRaidType=0\n" Comments="" Collapsed="0" IsLinkedObject="0" IDLinkedModel="-1" Obj_id_Linked="-1" OrderPos="4" >
 <COLUMNS>
 <COLUMN ID="1300" ColName="CidId" PrevColName="" Pos="0" idDatatype="5" DatatypeParams="" Width="-1" Prec="-1" PrimaryKey="1" NotNull="1" AutoInc="1" IsForeignKey="0" DefaultValue="" Comments="">
 <OPTIONSELECTED>
@@ -401,8 +401,8 @@
 </COLUMN>
 </COLUMNS>
 <RELATIONS_START>
-<RELATION_START ID="1327" />
 <RELATION_START ID="1344" />
+<RELATION_START ID="1327" />
 </RELATIONS_START>
 <RELATIONS_END>
 <RELATION_END ID="1330" />
@@ -833,7 +833,6 @@
 </TABLE>
 </TABLES>
 <RELATIONS>
-<RELATION ID="1327" RelationName="Rel_07" Kind="2" SrcTable="1298" DestTable="1272" FKFields="CidId=cidade_CidId\n" FKFieldsComments="\n" relDirection="2" MidOffset="0" OptionalStart="0" OptionalEnd="0" CaptionOffsetX="0" CaptionOffsetY="0" StartIntervalOffsetX="0" StartIntervalOffsetY="0" EndIntervalOffsetX="0" EndIntervalOffsetY="0" CreateRefDef="1" Invisible="0" RefDef="Matching=0\nOnDelete=3\nOnUpdate=3\n" Comments="" FKRefDefIndex_Obj_id="1329" Splitted="0" IsLinkedObject="0" IDLinkedModel="-1" Obj_id_Linked="-1" OrderPos="5" />
 <RELATION ID="1330" RelationName="Rel_08" Kind="2" SrcTable="1291" DestTable="1298" FKFields="EstId=estado_EstId\n" FKFieldsComments="\n" relDirection="3" MidOffset="0" OptionalStart="0" OptionalEnd="0" CaptionOffsetX="0" CaptionOffsetY="0" StartIntervalOffsetX="0" StartIntervalOffsetY="0" EndIntervalOffsetX="0" EndIntervalOffsetY="0" CreateRefDef="1" Invisible="0" RefDef="Matching=0\nOnDelete=3\nOnUpdate=3\n" Comments="" FKRefDefIndex_Obj_id="1332" Splitted="0" IsLinkedObject="0" IDLinkedModel="-1" Obj_id_Linked="-1" OrderPos="6" />
 <RELATION ID="1341" RelationName="Rel_09" Kind="2" SrcTable="1333" DestTable="1272" FKFields="UniId=universidade_UniId\n" FKFieldsComments="\n" relDirection="3" MidOffset="0" OptionalStart="0" OptionalEnd="0" CaptionOffsetX="0" CaptionOffsetY="0" StartIntervalOffsetX="0" StartIntervalOffsetY="0" EndIntervalOffsetX="0" EndIntervalOffsetY="0" CreateRefDef="1" Invisible="0" RefDef="Matching=0\nOnDelete=3\nOnUpdate=3\n" Comments="" FKRefDefIndex_Obj_id="1343" Splitted="0" IsLinkedObject="0" IDLinkedModel="-1" Obj_id_Linked="-1" OrderPos="8" />
 <RELATION ID="1344" RelationName="Rel_10" Kind="2" SrcTable="1298" DestTable="1333" FKFields="CidId=cidade_CidId\n" FKFieldsComments="\n" relDirection="2" MidOffset="0" OptionalStart="0" OptionalEnd="0" CaptionOffsetX="0" CaptionOffsetY="0" StartIntervalOffsetX="0" StartIntervalOffsetY="0" EndIntervalOffsetX="0" EndIntervalOffsetY="0" CreateRefDef="1" Invisible="0" RefDef="Matching=0\nOnDelete=3\nOnUpdate=3\n" Comments="" FKRefDefIndex_Obj_id="1346" Splitted="0" IsLinkedObject="0" IDLinkedModel="-1" Obj_id_Linked="-1" OrderPos="9" />
@@ -847,6 +846,7 @@
 <RELATION ID="1416" RelationName="Rel_18" Kind="2" SrcTable="1410" DestTable="1400" FKFields="AltId=alternativa_AltId\n" FKFieldsComments="\n" relDirection="2" MidOffset="0" OptionalStart="0" OptionalEnd="0" CaptionOffsetX="0" CaptionOffsetY="0" StartIntervalOffsetX="0" StartIntervalOffsetY="0" EndIntervalOffsetX="0" EndIntervalOffsetY="0" CreateRefDef="1" Invisible="0" RefDef="Matching=0\nOnDelete=3\nOnUpdate=3\n" Comments="" FKRefDefIndex_Obj_id="1418" Splitted="0" IsLinkedObject="0" IDLinkedModel="-1" Obj_id_Linked="-1" OrderPos="24" />
 <RELATION ID="1426" RelationName="Rel_19" Kind="2" SrcTable="1419" DestTable="1410" FKFields="QuesId=questao_QuesId\n" FKFieldsComments="\n" relDirection="2" MidOffset="0" OptionalStart="0" OptionalEnd="0" CaptionOffsetX="0" CaptionOffsetY="0" StartIntervalOffsetX="0" StartIntervalOffsetY="0" EndIntervalOffsetX="0" EndIntervalOffsetY="0" CreateRefDef="1" Invisible="0" RefDef="Matching=0\nOnDelete=3\nOnUpdate=3\n" Comments="" FKRefDefIndex_Obj_id="1428" Splitted="0" IsLinkedObject="0" IDLinkedModel="-1" Obj_id_Linked="-1" OrderPos="26" />
 <RELATION ID="1434" RelationName="Rel_20" Kind="2" SrcTable="1429" DestTable="1419" FKFields="AreaId=area_conhecimento_AreaId\n" FKFieldsComments="\n" relDirection="1" MidOffset="0" OptionalStart="0" OptionalEnd="0" CaptionOffsetX="0" CaptionOffsetY="0" StartIntervalOffsetX="0" StartIntervalOffsetY="0" EndIntervalOffsetX="0" EndIntervalOffsetY="0" CreateRefDef="1" Invisible="0" RefDef="Matching=0\nOnDelete=3\nOnUpdate=3\n" Comments="" FKRefDefIndex_Obj_id="1436" Splitted="0" IsLinkedObject="0" IDLinkedModel="-1" Obj_id_Linked="-1" OrderPos="28" />
+<RELATION ID="1327" RelationName="Rel_07" Kind="2" SrcTable="1298" DestTable="1272" FKFields="CidId=cidade_CidId\n" FKFieldsComments="\n" relDirection="2" MidOffset="0" OptionalStart="0" OptionalEnd="0" CaptionOffsetX="0" CaptionOffsetY="0" StartIntervalOffsetX="0" StartIntervalOffsetY="0" EndIntervalOffsetX="0" EndIntervalOffsetY="0" CreateRefDef="1" Invisible="0" RefDef="Matching=0\nOnDelete=3\nOnUpdate=3\n" Comments="" FKRefDefIndex_Obj_id="1468" Splitted="0" IsLinkedObject="0" IDLinkedModel="-1" Obj_id_Linked="-1" OrderPos="5" />
 </RELATIONS>
 <NOTES>
 </NOTES>

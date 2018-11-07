@@ -121,7 +121,7 @@
                                     ${avaliacao.getId()}
                                 </td>
                                 <td>
-                                    ${avaliacao.getData()}
+                                    ${avaliacao.getDataFormatada()}
                                 </td>
                                 <td>
                                     ${avaliacao.getUsuario().getNome()}

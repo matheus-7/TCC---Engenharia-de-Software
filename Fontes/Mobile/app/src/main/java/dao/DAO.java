@@ -19,7 +19,7 @@ public class DAO {
 
     private OkHttpClient client;
     public static final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
-    private final String API_URL = "http://172.20.10.8:8084/TCC_API/api";
+    private final String API_URL = "http://172.20.62.3:8084/TCC_API/api";
     private static Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
 
     public DAO() {
